@@ -1,0 +1,14 @@
+{% extends "adminbase.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit Feature</h2>
+    <div class="card p-4 shadow-sm">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

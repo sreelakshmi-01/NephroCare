@@ -1,0 +1,117 @@
+{% extends "userbase.html" %}
+{% load static %}
+{% block title %}Know Your Kidney{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="color: #004AAD; padding-top:40px; font-weight:bold;">Know Your Kidney</h1>
+
+    <!-- Introduction Section -->
+    <section class="intro mb-5" style="background-color: #fff3e6; padding: 30px; border-radius: 10px;">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <p style="font-size: 16px; text-align:justify; padding-left:40px; line-height:28px; color: #555; padding-top:12px;">
+                    Your kidneys are essential organs that play a crucial role in maintaining your overall health by performing a variety of vital functions. They filter waste products and excess fluids from the blood, creating urine to help eliminate toxins from your body. In addition to this, kidneys regulate the balance of electrolytes, such as sodium, potassium, and calcium, which are vital for nerve function, muscle contraction, and maintaining the body's pH levels. They also help control blood pressure by adjusting the volume of blood and regulating the amount of sodium in the bloodstream. Moreover, kidneys produce hormones like erythropoietin, which stimulates red blood cell production, and renin, which helps manage blood pressure. By supporting these essential functions, kidneys maintain a stable internal environment, and any disruption in their functioning can lead to serious health conditions, including kidney disease. Understanding the importance of kidney health is crucial to prevent these conditions and take proactive steps to protect your kidneys for a healthier life.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'img/kyk.jpg' %}" style="height:280px; padding-left:40px;" alt="Kidney Health" class="img-fluid rounded" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Kidney Functions Section -->
+    <section class="functions mb-5" style="background-color: #f0f8ff; padding: 30px; border-radius: 10px;">
+        <h2 class="section-heading" style="color: #004AAD; text-align: center; font-weight:bold; padding-bottom:20px;">Functions of Kidneys</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <ul style="font-size: 16px; color: #555; line-height:28px;">
+                    <li><strong>Waste Filtration:</strong> Kidneys filter waste products and excess substances from the bloodstream, creating urine.</li>
+                    <li><strong>Fluid and Electrolyte Balance:</strong> They help regulate water levels and electrolytes (like sodium, potassium).</li>
+                    <li><strong>Blood Pressure Regulation:</strong> Kidneys help regulate blood pressure by managing sodium levels and fluid volume.</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul style="font-size: 16px; color: #555; line-height:28px;">
+                    <li><strong>Acid-Base Balance:</strong> Kidneys maintain the pH balance of the blood by excreting hydrogen ions.</li>
+                    <li><strong>Red Blood Cell Production:</strong> Kidneys produce erythropoietin, a hormone that stimulates red blood cell production.</li>
+                    <li><strong>Detoxification:</strong> Kidneys remove toxins and waste materials from the body through urine.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Symptoms of Kidney Disease Section -->
+    <section class="symptoms mb-5" style="background-color: #fff3e6; padding-top: 30px; padding-left: 30px; border-radius: 10px;">
+        <h2 class="section-heading" style="color: #004AAD; text-align: center; font-weight:bold;">Symptoms of Kidney Disease</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <ul style="font-size: 16px; color: #555; line-height:38px; padding-left:80px; padding-top:20px;">
+                    <li>Swelling in the legs, ankles, and feet due to fluid retention.</li>
+                    <li>Fatigue, weakness, or feeling generally unwell.</li>
+                    <li>Changes in urine output – either too much or too little.</li>
+                    <li>Shortness of breath due to fluid buildup in the lungs.</li>
+                    <li>Persistent nausea or vomiting, leading to loss of appetite.</li>
+                    <li>Difficulty concentrating or experiencing mental confusion.</li>
+                    <li>Muscle cramps, especially at night.</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'img/kid.jpg' %}" style="height:280px; padding-left:40px; padding-top:20px;" alt="Kidney Disease Symptoms" class="img-fluid rounded" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Kidney Disease Prevention Section -->
+    <section class="prevention mb-5" style="background-color: #f0f8ff; padding: 30px; border-radius: 10px;">
+        <h2 class="section-heading" style="color: #004AAD; text-align: center; font-weight:bold;">How to Prevent Kidney Disease</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static 'img/kidney.jpg' %}" alt="Kidney Disease Prevention" style="padding-top:20px;" class="img-fluid rounded" />
+            </div>
+            <div class="col-md-6">
+                <ul style="font-size: 16px; color: #555; line-height:30px; padding-top:35px">
+                    <li>Stay hydrated by drinking plenty of water throughout the day.</li>
+                    <li>Maintain a balanced diet rich in fruits, vegetables, and whole grains.</li>
+                    <li>Monitor blood pressure and cholesterol levels regularly.</li>
+                    <li>Avoid excessive alcohol consumption and smoking.</li>
+                    <li>Limit salt intake to reduce the risk of high blood pressure.</li>
+                    <li>Engage in regular physical activity to maintain overall health.</li>
+                    <li>Avoid overuse of painkillers and non-prescription drugs that may harm the kidneys.</li>
+                    <li>Get regular kidney function tests if you have risk factors like diabetes or hypertension.</li>
+                    <li>Maintain a healthy weight to reduce stress on the kidneys.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kidney Disease Risk Factors Section -->
+    <section class="risk-factors mb-5" style="background-color: #fff3e6; padding: 30px; border-radius: 10px;">
+        <h2 class="section-heading" style="color: #004AAD; text-align: center; font-weight:bold;">Risk Factors for Kidney Disease</h2>
+        <div class="row">
+            <div class="col-md-7">
+                <ul style="font-size: 16px; color: #555; line-height:28px; padding-top:20px;">
+                    <li><strong>Diabetes:</strong> High blood sugar can damage the kidneys over time.</li>
+                    <li><strong>Hypertension:</strong> High blood pressure can damage the blood vessels in the kidneys.</li>
+                    <li><strong>Age:</strong> Kidney function can naturally decline with age.</li>
+                    <li><strong>Obesity:</strong> Being overweight puts extra stress on the kidneys and increases the risk of kidney disease.</li>
+                    <li><strong>Smoking:</strong> Smoking reduces blood flow to the kidneys and increases the risk of kidney damage.</li>
+                    <li><strong>Excessive Use of Painkillers:</strong> Regular use of NSAIDs (like ibuprofen) can harm the kidneys over time.</li>
+                    <li><strong>Chronic Dehydration:</strong> Not drinking enough water can lead to kidney stones and kidney damage.</li>
+                    <li><strong>Excessive Alcohol Consumption:</strong> Heavy drinking can lead to kidney disease over time.</li>
+                    </ul>
+            </div>
+            <div class="col-md-5">
+                <img src="{% static 'img/risk.jpg' %}" style="padding-top:20px; margin-top:30px; height:300px;" alt="Kidney Disease Risk Factors" class="img-fluid rounded" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Awareness & Resources Section -->
+    <section class="awareness text-center mb-5" style="background-color: #e6f7ff; padding: 30px; border-radius: 10px;">
+        <h2 class="section-heading" style="color: #004AAD; font-weight:bold;">Learn More About Kidney Health</h2>
+        <p style="font-size: 16px; color: #555;">Kidney health is vital for a healthy life. Stay informed and take proactive steps to protect your kidneys.</p>
+        <a href="#" class="btn btn-primary btn-lg" style="background-color: #004AAD; color: white;">Explore Treatment Options</a>
+    </section>
+</div>
+{% endblock %}

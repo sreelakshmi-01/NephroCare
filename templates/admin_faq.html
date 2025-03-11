@@ -1,0 +1,40 @@
+{% extends "adminbase.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Manage FAQs</h2>
+
+    <!-- Pending Questions Section -->
+    <div class="card p-4 shadow-sm mb-4">
+        <h4 class="mb-3">Pending Questions</h4>
+        {% for faq in pending_faqs %}
+        <div class="faq-item border p-3 mb-3 rounded">
+            <h5>{{ faq.question }}</h5>
+            <form method="post" action="{% url 'admin_faq' %}">
+                {% csrf_token %}
+                <input type="hidden" name="faq_id" value="{{ faq.id }}">
+                <textarea name="answer" class="form-control mb-2" placeholder="Enter answer here..." required></textarea>
+                <button type="submit" class="btn btn-success btn-sm">Approve & Publish</button>
+                <a href="{% url 'delete_faq' faq.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </form>
+        </div>
+        {% empty %}
+        <p>No pending questions.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Approved FAQs Section -->
+    <div class="card p-4 shadow-sm">
+        <h4 class="mb-3">Approved FAQs</h4>
+        {% for faq in approved_faqs %}
+        <div class="faq-item border p-3 mb-3 rounded">
+            <h5>{{ faq.question }}</h5>
+            <p>{{ faq.answer }}</p>
+            <a href="{% url 'delete_faq' faq.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+        {% empty %}
+        <p>No approved FAQs yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
