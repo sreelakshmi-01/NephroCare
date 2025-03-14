@@ -108,3 +108,40 @@ def delete_faq(request, id):
     faq = get_object_or_404(FAQ, id=id)
     faq.delete()
     return redirect('admin_faq')
+
+def register(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        # Create and save user to the database
+        User.objects.create(name=name, email=email, password=password)
+
+        return redirect("login")
+
+    return render(request, "user_register.html")
+
+def login_view(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(email=email)
+            if user.password == password:  # No hashing for now
+                request.session['user_id'] = user.id  # Store user session
+                request.session['user_role'] = user.role  # Store role for redirection
+
+                return redirect('adminbase' if user.role == "admin" else 'userhome')
+            else:
+                messages.error(request, "Invalid password")
+        except User.DoesNotExist:
+            messages.error(request, "User does not exist")
+
+    return render(request, "login.html")
+
+
+def logout_view(request):
+    request.session.flush()
+    return redirect("login")
