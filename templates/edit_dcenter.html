@@ -1,0 +1,13 @@
+{% extends 'adminbase.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Edit Dialysis Center</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Center</button>
+    </form>
+    <a href="{% url 'add_dcenter' %}">Back to List</a>
+</div>
+{% endblock %}

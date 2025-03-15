@@ -17,4 +17,9 @@ urlpatterns = [
     path('faq/', views.faq, name='faq'),
     path('admin-faq/', views.admin_faq, name='admin_faq'),
     path('admin-faqs/delete/<int:id>/', views.delete_faq, name='delete_faq'),
+    path('admin-dialysis-centers/', views.add_dcenter, name='add_dcenter'),
+    path('admin-dialysis-centers/edit/<int:center_id>/', views.edit_dcenter, name='edit_dcenter'),
+    path('admin-dialysis-centers/delete/<int:center_id>/', views.delete_dcenter, name='delete_dcenter'),
+    path('dialysis-centers/', views.dialysis_center, name='dialysis_center'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

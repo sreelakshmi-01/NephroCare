@@ -1,0 +1,140 @@
+{% extends 'adminbase.html' %}
+
+{% block content %}
+<style>
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    h2, h3 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    form textarea {
+        height: 60px; /* Reduced height for full address */
+    }
+
+    form button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    form button:hover {
+        background-color: #0056b3;
+    }
+
+    .table-container {
+        margin-top: 30px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    th, td {
+        padding: 12px;
+    }
+
+    th {
+        background: #007bff;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background: #f2f2f2;
+    }
+
+    td a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        margin: 0 5px;
+    }
+
+    td a:hover {
+        color: #0056b3;
+    }
+
+    td a:last-child {
+        color: red;
+    }
+
+    td a:last-child:hover {
+        color: darkred;
+    }
+</style>
+
+<div class="container">
+    <h2>Add Dialysis Center</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Center</button>
+    </form>
+</div>
+
+<div class="table-container">
+    <h3>Existing Centers</h3>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Dialysis Center</th>
+            <th>Full Address</th>
+            <th>District</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+        </tr>
+        {% for center in centers %}
+        <tr>
+            <td>{{ center.id }}</td>
+            <td>{{ center.name }}</td>
+            <td>{{ center.full_address }}</td>
+            <td>{{ center.district }}</td>
+            <td>{{ center.email }}</td>
+            <td>{{ center.phone_number }}</td>
+            <td>
+                <a href="{% url 'edit_dcenter' center.id %}">Edit</a> |
+                <a href="{% url 'delete_dcenter' center.id %}" onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

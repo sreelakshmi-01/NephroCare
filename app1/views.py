@@ -145,3 +145,46 @@ def login_view(request):
 def logout_view(request):
     request.session.flush()
     return redirect("login")
+
+def add_dcenter(request):
+    centers = DialysisCenter.objects.all()
+    if request.method == 'POST':
+        form = DialysisCenterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_dcenter')
+    else:
+        form = DialysisCenterForm()
+
+    return render(request, 'add_dcenter.html', {'form': form, 'centers': centers})
+
+def edit_dcenter(request, center_id):
+    center = get_object_or_404(DialysisCenter, id=center_id)
+    if request.method == 'POST':
+        form = DialysisCenterForm(request.POST, instance=center)
+        if form.is_valid():
+            form.save()
+            return redirect('add_dcenter')  # Redirect back to main page
+    else:
+        form = DialysisCenterForm(instance=center)
+
+    return render(request, 'edit_dcenter.html', {'form': form, 'center': center})
+
+def delete_dcenter(request, center_id):
+    center = get_object_or_404(DialysisCenter, id=center_id)
+    center.delete()
+    return redirect('add_dcenter')
+
+
+def dialysis_center(request):
+    # Fetch unique districts from the database
+    districts = DialysisCenter.objects.values_list('district', flat=True).distinct()
+
+    # Apply filter if a district is selected
+    selected_district = request.GET.get('district')
+    if selected_district:
+        centers = DialysisCenter.objects.filter(district=selected_district)
+    else:
+        centers = DialysisCenter.objects.all()
+
+    return render(request, 'dialysis_center.html', {'centers': centers, 'districts': districts})
