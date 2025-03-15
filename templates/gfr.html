@@ -5,8 +5,8 @@
 {% block content %}
 <style>
     .gfr-container {
-        width: 50%;
-        margin: 50px auto;
+        width: 80%;
+        margin: 80px auto;
         padding: 20px;
         border: 2px solid #004AAD;
         border-radius: 10px;
@@ -14,6 +14,8 @@
     }
     .gfr-container h2 {
         color: #004AAD;
+        font-weight:bold;
+        padding-bottom:20px;
     }
     .input-group {
         display: flex;
@@ -43,7 +45,7 @@
 <div class="gfr-container">
     <h2>GFR Calculator</h2>
     <div class="input-group">
-        <input type="number" id="creatinine" placeholder="Serum Creatinine (mg/dL)" step="0.01">
+        <input type="number" id="creatinine" placeholder="Serum Creatinine (mg/dL)" step="0.1" min="0.2" max="20" style="width: 200px;">
         <input type="number" id="age" placeholder="Age">
         <select id="gender">
             <option value="male">Male</option>
