@@ -188,3 +188,6 @@ def dialysis_center(request):
         centers = DialysisCenter.objects.all()
 
     return render(request, 'dialysis_center.html', {'centers': centers, 'districts': districts})
+
+def gfr(request):
+    return render(request, "gfr.html")

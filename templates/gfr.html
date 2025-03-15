@@ -1,0 +1,85 @@
+{% extends 'userbase.html' %}
+
+{% block title %}GFR Calculator{% endblock %}
+
+{% block content %}
+<style>
+    .gfr-container {
+        width: 50%;
+        margin: 50px auto;
+        padding: 20px;
+        border: 2px solid #004AAD;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .gfr-container h2 {
+        color: #004AAD;
+    }
+    .input-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+    input, select, button {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        background-color: #004AAD;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    #result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #004AAD;
+    }
+</style>
+
+<div class="gfr-container">
+    <h2>GFR Calculator</h2>
+    <div class="input-group">
+        <input type="number" id="creatinine" placeholder="Serum Creatinine (mg/dL)" step="0.01">
+        <input type="number" id="age" placeholder="Age">
+        <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <button onclick="calculateGFR()">Calculate GFR</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateGFR() {
+        let creatinine = parseFloat(document.getElementById("creatinine").value);
+        let age = parseInt(document.getElementById("age").value);
+        let gender = document.getElementById("gender").value;
+
+        if (isNaN(creatinine) || isNaN(age) || age <= 0 || creatinine <= 0) {
+            document.getElementById("result").innerHTML = "Please enter valid values.";
+            return;
+        }
+
+        let gfr;
+        if (gender === "male") {
+            gfr = 175 * Math.pow(creatinine, -1.154) * Math.pow(age, -0.203);
+        } else {
+            gfr = 175 * Math.pow(creatinine, -1.154) * Math.pow(age, -0.203) * 0.742;
+        }
+
+        let stage;
+        if (gfr >= 90) stage = "Stage 1 - Normal";
+        else if (gfr >= 60) stage = "Stage 2 - Mild CKD";
+        else if (gfr >= 30) stage = "Stage 3 - Moderate CKD";
+        else if (gfr >= 15) stage = "Stage 4 - Severe CKD";
+        else stage = "Stage 5 - Kidney Failure";
+
+        document.getElementById("result").innerHTML = `GFR: ${gfr.toFixed(2)} mL/min/1.73m²<br>${stage}`;
+    }
+</script>
+{% endblock %}
