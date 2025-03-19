@@ -111,29 +111,29 @@
         background: #FFE4E4;
         color: #000000;
     }
+
 </style>
 {% load static %}
 <!-- Hero Section -->
 <div class="hero" style="padding-top:80px; ">
     <!-- Background Image with Blur Effect -->
-    <img src="{% static 'img/dialcen.png' %}" alt="Dialysis Center" class="hero-bg">
+    <img alt="Dialysis Center" class="hero-bg" src="{% static 'img/dialcen.png' %}">
 
     <div class="hero-content">
         <h1>Find a Dialysis Center Near You</h1>
 
         <!-- Search Bar with District Dropdown -->
-        <form method="GET" action="{% url 'dialysis_center' %}" class="search-form">
-            <select name="district" class="search-bar">
+        <form action="{% url 'dialysis_center' %}" class="search-form" method="GET">
+            <select class="search-bar" name="district">
                 <option value="">Choose District</option>
                 {% for district in districts %}
-                    <option value="{{ district }}">{{ district }}</option>
+                <option value="{{ district }}">{{ district }}</option>
                 {% endfor %}
             </select>
-            <button type="submit" class="search-btn">Search</button>
+            <button class="search-btn" type="submit">Search</button>
         </form>
     </div>
 </div>
-
 
 
 <!-- Dialysis Center Table -->

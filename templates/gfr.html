@@ -40,12 +40,14 @@
         font-weight: bold;
         color: #004AAD;
     }
+
 </style>
 
 <div class="gfr-container">
     <h2>GFR Calculator</h2>
     <div class="input-group">
-        <input type="number" id="creatinine" placeholder="Serum Creatinine (mg/dL)" step="0.1" min="0.2" max="20" style="width: 200px;">
+        <input type="number" id="creatinine" placeholder="Serum Creatinine (mg/dL)" step="0.1" min="0.2" max="20"
+               style="width: 200px;">
         <input type="number" id="age" placeholder="Age">
         <select id="gender">
             <option value="male">Male</option>
@@ -57,274 +59,324 @@
 </div>
 
 <div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item" style="border-top: 5px solid #35FF3B;">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        <div>
-            <strong style="display: block; margin-bottom: 15px;">Stage 1 Kidney Disease</strong>
-            <span style="display: block; margin-bottom: 15px;">Healthy kidney or kidney damage with normal or high GFR</span>
-            <small style="display: block; font-weight: 300;">GFR LEVEL: 90mL/min or more</small>
-        </div>
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
-            <p>
-                <strong>Stage 1 Chronic Kidney Disease (CKD)</strong> is the earliest stage of kidney disease, where there is mild kidney damage, but the kidneys are still functioning normally.
-                This stage is typically diagnosed when the estimated glomerular filtration rate (eGFR) is <strong>90 mL/min/1.73m² or higher</strong>, indicating that the kidneys are still effectively filtering waste and excess fluids from the blood.
-            </p>
+    <div class="accordion-item" style="border-top: 5px solid #35FF3B;">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <div>
+                    <strong style="display: block; margin-bottom: 15px;">Stage 1 Kidney Disease</strong>
+                    <span style="display: block; margin-bottom: 15px;">Healthy kidney or kidney damage with normal or high GFR</span>
+                    <small style="display: block; font-weight: 300;">GFR LEVEL: 90mL/min or more</small>
+                </div>
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <p>
+                    <strong>Stage 1 Chronic Kidney Disease (CKD)</strong> is the earliest stage of kidney disease, where
+                    there is mild kidney damage, but the kidneys are still functioning normally.
+                    This stage is typically diagnosed when the estimated glomerular filtration rate (eGFR) is <strong>90
+                    mL/min/1.73m² or higher</strong>, indicating that the kidneys are still effectively filtering waste
+                    and excess fluids from the blood.
+                </p>
 
-            <p>However, there may be signs of kidney damage, such as:</p>
-            <ul>
-                <li>Protein in the urine (proteinuria)</li>
-                <li>Abnormalities in imaging tests</li>
-            </ul>
+                <p>However, there may be signs of kidney damage, such as:</p>
+                <ul>
+                    <li>Protein in the urine (proteinuria)</li>
+                    <li>Abnormalities in imaging tests</li>
+                </ul>
 
-            <p>
-                Since Stage 1 CKD often has no noticeable symptoms, it is usually detected during routine health check-ups or tests conducted for other medical conditions.
-                Although the kidneys are still working well, underlying conditions like:
-            </p>
-            <ul>
-                <li>Diabetes</li>
-                <li>High blood pressure</li>
-                <li>Genetic factors</li>
-            </ul>
-            <p>may contribute to the damage.</p>
+                <p>
+                    Since Stage 1 CKD often has no noticeable symptoms, it is usually detected during routine health
+                    check-ups or tests conducted for other medical conditions.
+                    Although the kidneys are still working well, underlying conditions like:
+                </p>
+                <ul>
+                    <li>Diabetes</li>
+                    <li>High blood pressure</li>
+                    <li>Genetic factors</li>
+                </ul>
+                <p>may contribute to the damage.</p>
 
-            <p>Managing Stage 1 CKD involves several lifestyle changes, including:</p>
-            <ul>
-                <li>Maintaining a balanced diet</li>
-                <li>Controlling blood pressure and blood sugar levels</li>
-                <li>Staying hydrated</li>
-                <li>Avoiding medications that can harm the kidneys (such as certain painkillers or nonsteroidal anti-inflammatory drugs)</li>
-            </ul>
+                <p>Managing Stage 1 CKD involves several lifestyle changes, including:</p>
+                <ul>
+                    <li>Maintaining a balanced diet</li>
+                    <li>Controlling blood pressure and blood sugar levels</li>
+                    <li>Staying hydrated</li>
+                    <li>Avoiding medications that can harm the kidneys (such as certain painkillers or nonsteroidal
+                        anti-inflammatory drugs)
+                    </li>
+                </ul>
 
-            <p>
-                Early intervention at this stage can significantly slow the progression of kidney disease and reduce the risk of complications, improving long-term kidney health.
-                Regular monitoring and consultations with a healthcare professional are essential to ensure kidney function remains stable and to address any potential risks.
-            </p>
+                <p>
+                    Early intervention at this stage can significantly slow the progression of kidney disease and reduce
+                    the risk of complications, improving long-term kidney health.
+                    Regular monitoring and consultations with a healthcare professional are essential to ensure kidney
+                    function remains stable and to address any potential risks.
+                </p>
+            </div>
         </div>
     </div>
-  </div>
 
     <div class="accordion-item" style="border-top: 5px solid #8EDE45;">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-        <div>
-            <strong style="display: block; margin-bottom: 15px;">Stage 2 Kidney Disease</strong>
-            <span style="display: block; margin-bottom: 15px;">Kidney damage and mild decrease in GFR</span>
-            <small style="display: block; font-weight: 300;">GFR LEVEL: 60 TO 89 mL/min</small>
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                <div>
+                    <strong style="display: block; margin-bottom: 15px;">Stage 2 Kidney Disease</strong>
+                    <span style="display: block; margin-bottom: 15px;">Kidney damage and mild decrease in GFR</span>
+                    <small style="display: block; font-weight: 300;">GFR LEVEL: 60 TO 89 mL/min</small>
+                </div>
+            </button>
+        </h2>
+
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <p>
+                    <strong>Stage 2 Chronic Kidney Disease (CKD)</strong> is the second stage of kidney disease, where
+                    there is a mild decrease in kidney function, but the kidneys can still perform their essential
+                    tasks.
+                    This stage is diagnosed when the estimated glomerular filtration rate (eGFR) falls between <strong>60
+                    to 89 mL/min/1.73m²</strong>, indicating a slight reduction in the ability to filter waste and
+                    excess fluids from the blood.
+                </p>
+
+                <p>While many individuals at this stage do not experience noticeable symptoms, early signs of kidney
+                    damage may include:</p>
+                <ul>
+                    <li>Protein in the urine (proteinuria)</li>
+                    <li>High blood pressure</li>
+                    <li>Mild swelling in hands or feet</li>
+                </ul>
+
+                <p>Stage 2 CKD can be caused by various factors, such as:</p>
+                <ul>
+                    <li>Diabetes</li>
+                    <li>High blood pressure</li>
+                    <li>Kidney infections</li>
+                    <li>Genetic kidney disorders</li>
+                </ul>
+
+                <p>To slow the progression of kidney disease and maintain kidney function, it is essential to:</p>
+                <ul>
+                    <li>Adopt a kidney-friendly diet low in sodium and processed foods</li>
+                    <li>Control blood pressure and blood sugar levels</li>
+                    <li>Stay well-hydrated</li>
+                    <li>Avoid smoking and excessive alcohol consumption</li>
+                    <li>Limit the use of nonsteroidal anti-inflammatory drugs (NSAIDs) and other nephrotoxic
+                        medications
+                    </li>
+                </ul>
+
+                <p>
+                    Regular health check-ups and monitoring kidney function through blood and urine tests are crucial
+                    for early intervention.
+                    Consulting a healthcare professional ensures appropriate management strategies to prevent further
+                    kidney damage and maintain overall health.
+                </p>
+            </div>
         </div>
-      </button>
-    </h2>
 
-    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-    <div class="accordion-body">
-        <p>
-            <strong>Stage 2 Chronic Kidney Disease (CKD)</strong> is the second stage of kidney disease, where there is a mild decrease in kidney function, but the kidneys can still perform their essential tasks.
-            This stage is diagnosed when the estimated glomerular filtration rate (eGFR) falls between <strong>60 to 89 mL/min/1.73m²</strong>, indicating a slight reduction in the ability to filter waste and excess fluids from the blood.
-        </p>
-
-        <p>While many individuals at this stage do not experience noticeable symptoms, early signs of kidney damage may include:</p>
-        <ul>
-            <li>Protein in the urine (proteinuria)</li>
-            <li>High blood pressure</li>
-            <li>Mild swelling in hands or feet</li>
-        </ul>
-
-        <p>Stage 2 CKD can be caused by various factors, such as:</p>
-        <ul>
-            <li>Diabetes</li>
-            <li>High blood pressure</li>
-            <li>Kidney infections</li>
-            <li>Genetic kidney disorders</li>
-        </ul>
-
-        <p>To slow the progression of kidney disease and maintain kidney function, it is essential to:</p>
-        <ul>
-            <li>Adopt a kidney-friendly diet low in sodium and processed foods</li>
-            <li>Control blood pressure and blood sugar levels</li>
-            <li>Stay well-hydrated</li>
-            <li>Avoid smoking and excessive alcohol consumption</li>
-            <li>Limit the use of nonsteroidal anti-inflammatory drugs (NSAIDs) and other nephrotoxic medications</li>
-        </ul>
-
-        <p>
-            Regular health check-ups and monitoring kidney function through blood and urine tests are crucial for early intervention.
-            Consulting a healthcare professional ensures appropriate management strategies to prevent further kidney damage and maintain overall health.
-        </p>
-    </div>
     </div>
 
-  </div>
+    <div class="accordion-item" style="border-top: 5px solid #F8C636;">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                <div>
+                    <strong style="display: block; margin-bottom: 15px;">Stage 3 Kidney Disease</strong>
+                    <span style="display: block; margin-bottom: 15px;">Moderate decrease in GFR</span>
+                    <small style="display: block; font-weight: 300;">GFR LEVEL: 30 TO 59 mL/min</small>
+                </div>
+            </button>
+        </h2>
 
-  <div class="accordion-item" style="border-top: 5px solid #F8C636;">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-        <div>
-            <strong style="display: block; margin-bottom: 15px;">Stage 3 Kidney Disease</strong>
-            <span style="display: block; margin-bottom: 15px;">Moderate decrease in GFR</span>
-            <small style="display: block; font-weight: 300;">GFR LEVEL: 30 TO 59 mL/min</small>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <p>
+                    <strong>Stage 3 Chronic Kidney Disease (CKD)</strong> is a moderate stage of kidney disease where
+                    kidney function is noticeably reduced.
+                    This stage is diagnosed when the estimated glomerular filtration rate (eGFR) falls between <strong>30
+                    to 59 mL/min/1.73m²</strong>, indicating a more significant decline in the kidneys' ability to
+                    filter waste and excess fluids from the blood.
+                </p>
+
+                <p>Unlike earlier stages, Stage 3 CKD may start showing noticeable symptoms, including:</p>
+                <ul>
+                    <li>Fatigue and weakness</li>
+                    <li>Swelling in hands, feet, or face due to fluid retention</li>
+                    <li>Changes in urination (frequent urination or reduced urine output)</li>
+                    <li>Back pain or discomfort in the kidney area</li>
+                    <li>High blood pressure</li>
+                </ul>
+
+                <p>Common causes of Stage 3 CKD include:</p>
+                <ul>
+                    <li>Diabetes</li>
+                    <li>Hypertension (high blood pressure)</li>
+                    <li>Polycystic kidney disease (PKD)</li>
+                    <li>Chronic kidney infections</li>
+                    <li>Autoimmune diseases (such as lupus)</li>
+                </ul>
+
+                <p>Managing Stage 3 CKD is crucial to slow disease progression and reduce complications. Recommended
+                    strategies include:</p>
+                <ul>
+                    <li>Following a kidney-friendly diet with controlled protein, sodium, and phosphorus intake</li>
+                    <li>Maintaining a healthy blood pressure and blood sugar level</li>
+                    <li>Drinking adequate fluids but avoiding excessive intake</li>
+                    <li>Limiting potassium-rich foods if recommended by a doctor</li>
+                    <li>Avoiding smoking and alcohol consumption</li>
+                    <li>Regular use of prescribed medications to protect kidney function</li>
+                </ul>
+
+                <p>
+                    At this stage, regular check-ups with a healthcare professional are essential to monitor kidney
+                    function and prevent further decline.
+                    Early medical intervention and lifestyle changes can help slow disease progression and improve
+                    overall health.
+                </p>
+            </div>
         </div>
-      </button>
-    </h2>
 
-    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-    <div class="accordion-body">
-        <p>
-            <strong>Stage 3 Chronic Kidney Disease (CKD)</strong> is a moderate stage of kidney disease where kidney function is noticeably reduced.
-            This stage is diagnosed when the estimated glomerular filtration rate (eGFR) falls between <strong>30 to 59 mL/min/1.73m²</strong>, indicating a more significant decline in the kidneys' ability to filter waste and excess fluids from the blood.
-        </p>
+        <div class="accordion-item" style="border-top: 5px solid #FA9C32;">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    <div>
+                        <strong style="display: block; margin-bottom: 15px;">Stage 4 Kidney Disease</strong>
+                        <span style="display: block; margin-bottom: 15px;">Severe decrease in GFR</span>
+                        <small style="display: block; font-weight: 300;">GFR LEVEL: 15 TO 29 mL/min</small>
+                    </div>
+                </button>
+            </h2>
 
-        <p>Unlike earlier stages, Stage 3 CKD may start showing noticeable symptoms, including:</p>
-        <ul>
-            <li>Fatigue and weakness</li>
-            <li>Swelling in hands, feet, or face due to fluid retention</li>
-            <li>Changes in urination (frequent urination or reduced urine output)</li>
-            <li>Back pain or discomfort in the kidney area</li>
-            <li>High blood pressure</li>
-        </ul>
+            <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <p>
+                        <strong>Stage 4 Chronic Kidney Disease (CKD)</strong> is an advanced stage of kidney disease
+                        where kidney function is significantly reduced.
+                        This stage is diagnosed when the estimated glomerular filtration rate (eGFR) falls between
+                        <strong>15 to 29 mL/min/1.73m²</strong>, indicating a severe decline in the kidneys' ability to
+                        filter waste and excess fluids from the blood.
+                    </p>
 
-        <p>Common causes of Stage 3 CKD include:</p>
-        <ul>
-            <li>Diabetes</li>
-            <li>Hypertension (high blood pressure)</li>
-            <li>Polycystic kidney disease (PKD)</li>
-            <li>Chronic kidney infections</li>
-            <li>Autoimmune diseases (such as lupus)</li>
-        </ul>
+                    <p>At this stage, noticeable symptoms often develop, including:</p>
+                    <ul>
+                        <li>Severe fatigue and weakness</li>
+                        <li>Swelling in the hands, feet, or face due to fluid retention</li>
+                        <li>Changes in urination (frequent urination, dark-colored urine, or decreased urine output)
+                        </li>
+                        <li>Loss of appetite, nausea, and vomiting</li>
+                        <li>Difficulty concentrating or mental confusion</li>
+                        <li>Shortness of breath due to fluid buildup in the lungs</li>
+                    </ul>
 
-        <p>Managing Stage 3 CKD is crucial to slow disease progression and reduce complications. Recommended strategies include:</p>
-        <ul>
-            <li>Following a kidney-friendly diet with controlled protein, sodium, and phosphorus intake</li>
-            <li>Maintaining a healthy blood pressure and blood sugar level</li>
-            <li>Drinking adequate fluids but avoiding excessive intake</li>
-            <li>Limiting potassium-rich foods if recommended by a doctor</li>
-            <li>Avoiding smoking and alcohol consumption</li>
-            <li>Regular use of prescribed medications to protect kidney function</li>
-        </ul>
+                    <p>Common causes of Stage 4 CKD include:</p>
+                    <ul>
+                        <li>Diabetes</li>
+                        <li>Uncontrolled high blood pressure</li>
+                        <li>Polycystic kidney disease (PKD)</li>
+                        <li>Chronic glomerulonephritis</li>
+                        <li>Autoimmune disorders such as lupus</li>
+                    </ul>
 
-        <p>
-            At this stage, regular check-ups with a healthcare professional are essential to monitor kidney function and prevent further decline.
-            Early medical intervention and lifestyle changes can help slow disease progression and improve overall health.
-        </p>
-    </div>
-</div>
+                    <p>Management at Stage 4 CKD is critical to delay progression to kidney failure. Recommended
+                        strategies include:</p>
+                    <ul>
+                        <li>Following a strict kidney-friendly diet, limiting protein, sodium, potassium, and phosphorus
+                            intake
+                        </li>
+                        <li>Maintaining healthy blood pressure and blood sugar levels</li>
+                        <li>Taking prescribed medications to manage symptoms and protect kidney function</li>
+                        <li>Monitoring fluid intake to prevent overload</li>
+                        <li>Avoiding nephrotoxic medications such as NSAIDs</li>
+                        <li>Preparing for potential treatments such as dialysis or kidney transplantation</li>
+                    </ul>
 
-    <div class="accordion-item" style="border-top: 5px solid #FA9C32;">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-        <div>
-            <strong style="display: block; margin-bottom: 15px;">Stage 4 Kidney Disease</strong>
-            <span style="display: block; margin-bottom: 15px;">Severe decrease in GFR</span>
-            <small style="display: block; font-weight: 300;">GFR LEVEL: 15 TO 29 mL/min</small>
+                    <p>
+                        At this stage, regular medical supervision is essential to monitor kidney function and manage
+                        complications.
+                        Early discussions with a healthcare provider about dialysis or kidney transplant options may be
+                        necessary to ensure timely treatment if kidney function continues to decline.
+                    </p>
+                </div>
+            </div>
+
         </div>
-      </button>
-    </h2>
 
-    <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-    <div class="accordion-body">
-        <p>
-            <strong>Stage 4 Chronic Kidney Disease (CKD)</strong> is an advanced stage of kidney disease where kidney function is significantly reduced.
-            This stage is diagnosed when the estimated glomerular filtration rate (eGFR) falls between <strong>15 to 29 mL/min/1.73m²</strong>, indicating a severe decline in the kidneys' ability to filter waste and excess fluids from the blood.
-        </p>
+        <div class="accordion-item" style="border-top: 5px solid #F72A2F;">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                    <div>
+                        <strong style="display: block; margin-bottom: 15px;">Stage 5 Kidney Disease</strong>
+                        <span style="display: block; margin-bottom: 15px;">Kidney failure</span>
+                        <small style="display: block; font-weight: 300;">GFR LEVEL: Less than 15 mL/min or on
+                            dialysis</small>
+                    </div>
+                </button>
+            </h2>
 
-        <p>At this stage, noticeable symptoms often develop, including:</p>
-        <ul>
-            <li>Severe fatigue and weakness</li>
-            <li>Swelling in the hands, feet, or face due to fluid retention</li>
-            <li>Changes in urination (frequent urination, dark-colored urine, or decreased urine output)</li>
-            <li>Loss of appetite, nausea, and vomiting</li>
-            <li>Difficulty concentrating or mental confusion</li>
-            <li>Shortness of breath due to fluid buildup in the lungs</li>
-        </ul>
+            <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <p>
+                        <strong>Stage 5 Chronic Kidney Disease (CKD)</strong> is the final and most severe stage of
+                        kidney disease, where kidney function is critically low, and the kidneys can no longer perform
+                        their essential tasks effectively.
+                        This stage is diagnosed when the estimated glomerular filtration rate (eGFR) falls below
+                        <strong>15 mL/min/1.73m²</strong>, indicating kidney failure.
+                    </p>
 
-        <p>Common causes of Stage 4 CKD include:</p>
-        <ul>
-            <li>Diabetes</li>
-            <li>Uncontrolled high blood pressure</li>
-            <li>Polycystic kidney disease (PKD)</li>
-            <li>Chronic glomerulonephritis</li>
-            <li>Autoimmune disorders such as lupus</li>
-        </ul>
+                    <p>At this stage, symptoms become severe and may include:</p>
+                    <ul>
+                        <li>Extreme fatigue and weakness</li>
+                        <li>Severe swelling in the hands, feet, and face</li>
+                        <li>Shortness of breath due to fluid buildup in the lungs</li>
+                        <li>Persistent nausea, vomiting, and loss of appetite</li>
+                        <li>Severe itching and dry skin</li>
+                        <li>Muscle cramps and restless legs</li>
+                        <li>Confusion, difficulty concentrating, or memory issues</li>
+                        <li>Little to no urine output</li>
+                    </ul>
 
-        <p>Management at Stage 4 CKD is critical to delay progression to kidney failure. Recommended strategies include:</p>
-        <ul>
-            <li>Following a strict kidney-friendly diet, limiting protein, sodium, potassium, and phosphorus intake</li>
-            <li>Maintaining healthy blood pressure and blood sugar levels</li>
-            <li>Taking prescribed medications to manage symptoms and protect kidney function</li>
-            <li>Monitoring fluid intake to prevent overload</li>
-            <li>Avoiding nephrotoxic medications such as NSAIDs</li>
-            <li>Preparing for potential treatments such as dialysis or kidney transplantation</li>
-        </ul>
+                    <p>Common causes of Stage 5 CKD include:</p>
+                    <ul>
+                        <li>Diabetes</li>
+                        <li>Uncontrolled high blood pressure</li>
+                        <li>Polycystic kidney disease (PKD)</li>
+                        <li>Chronic glomerulonephritis</li>
+                        <li>Severe kidney infections or autoimmune disorders</li>
+                    </ul>
 
-        <p>
-            At this stage, regular medical supervision is essential to monitor kidney function and manage complications.
-            Early discussions with a healthcare provider about dialysis or kidney transplant options may be necessary to ensure timely treatment if kidney function continues to decline.
-        </p>
-    </div>
-</div>
+                    <p>At Stage 5, treatment options become critical for survival, including:</p>
+                    <ul>
+                        <li><strong>Dialysis:</strong> Hemodialysis or peritoneal dialysis is required to remove waste,
+                            excess fluids, and toxins from the blood.
+                        </li>
+                        <li><strong>Kidney Transplant:</strong> A kidney transplant may be considered for long-term
+                            treatment.
+                        </li>
+                        <li><strong>Strict Dietary Management:</strong> Limiting potassium, phosphorus, sodium, and
+                            fluid intake.
+                        </li>
+                        <li><strong>Medication Management:</strong> Controlling symptoms and preventing further
+                            complications.
+                        </li>
+                    </ul>
 
-  </div>
+                    <p>
+                        Stage 5 CKD requires immediate medical intervention. Consulting with a nephrologist and planning
+                        for dialysis or transplantation is essential to manage kidney failure and maintain quality of
+                        life.
+                    </p>
+                </div>
+            </div>
 
-    <div class="accordion-item" style="border-top: 5px solid #F72A2F;">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-        <div>
-            <strong style="display: block; margin-bottom: 15px;">Stage 5 Kidney Disease</strong>
-            <span style="display: block; margin-bottom: 15px;">Kidney failure</span>
-            <small style="display: block; font-weight: 300;">GFR LEVEL: Less than 15 mL/min or on dialysis</small>
         </div>
-      </button>
-    </h2>
 
-    <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-    <div class="accordion-body">
-        <p>
-            <strong>Stage 5 Chronic Kidney Disease (CKD)</strong> is the final and most severe stage of kidney disease, where kidney function is critically low, and the kidneys can no longer perform their essential tasks effectively.
-            This stage is diagnosed when the estimated glomerular filtration rate (eGFR) falls below <strong>15 mL/min/1.73m²</strong>, indicating kidney failure.
-        </p>
 
-        <p>At this stage, symptoms become severe and may include:</p>
-        <ul>
-            <li>Extreme fatigue and weakness</li>
-            <li>Severe swelling in the hands, feet, and face</li>
-            <li>Shortness of breath due to fluid buildup in the lungs</li>
-            <li>Persistent nausea, vomiting, and loss of appetite</li>
-            <li>Severe itching and dry skin</li>
-            <li>Muscle cramps and restless legs</li>
-            <li>Confusion, difficulty concentrating, or memory issues</li>
-            <li>Little to no urine output</li>
-        </ul>
-
-        <p>Common causes of Stage 5 CKD include:</p>
-        <ul>
-            <li>Diabetes</li>
-            <li>Uncontrolled high blood pressure</li>
-            <li>Polycystic kidney disease (PKD)</li>
-            <li>Chronic glomerulonephritis</li>
-            <li>Severe kidney infections or autoimmune disorders</li>
-        </ul>
-
-        <p>At Stage 5, treatment options become critical for survival, including:</p>
-        <ul>
-            <li><strong>Dialysis:</strong> Hemodialysis or peritoneal dialysis is required to remove waste, excess fluids, and toxins from the blood.</li>
-            <li><strong>Kidney Transplant:</strong> A kidney transplant may be considered for long-term treatment.</li>
-            <li><strong>Strict Dietary Management:</strong> Limiting potassium, phosphorus, sodium, and fluid intake.</li>
-            <li><strong>Medication Management:</strong> Controlling symptoms and preventing further complications.</li>
-        </ul>
-
-        <p>
-            Stage 5 CKD requires immediate medical intervention. Consulting with a nephrologist and planning for dialysis or transplantation is essential to manage kidney failure and maintain quality of life.
-        </p>
-    </div>
-</div>
-
-  </div>
-
-</div>
-
-<script>
+        <script>
     function calculateGFR() {
         let creatinine = parseFloat(document.getElementById("creatinine").value);
         let age = parseInt(document.getElementById("age").value);
@@ -351,5 +403,6 @@
 
         document.getElementById("result").innerHTML = `GFR: ${gfr.toFixed(2)} mL/min/1.73m²<br>${stage}`;
     }
-</script>
-{% endblock %}
+
+        </script>
+        {% endblock %}
