@@ -1,7 +1,105 @@
 {% extends 'userbase.html' %}
+{% load static %}
 
 {% block title %}Diet and Workout{% endblock %}
 
 {% block content %}
+<style>
+    /* Hero Section */
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 500px; /* Adjust height as needed */
+    }
 
+    .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(60%); /* Darken image for better text visibility */
+    }
+
+    .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        width: 100%;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Search Section */
+    .search-form {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .search-bar {
+        width: 300px;
+        height: 50px;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .search-btn {
+        background: #ED1C24;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+    .search-btn:hover {
+        background: #C1111A;
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="hero">
+    <img src="{% static 'img/diet.png' %}" alt="diet header">
+    <div class="hero-content">
+        <h1>Personalized Diet and Workout for Each Stage</h1>
+
+        <!-- Search Form -->
+        <form method="GET" action="{% url 'diet' %}" class="search-form">
+            <select name="stage" class="search-bar">
+                <option value="">Select Stage</option>
+                <option value="stage1-2">Stage 1-2</option>
+                <option value="stage3-4">Stage 3-4</option>
+                <option value="stage5">Stage 5</option>
+            </select>
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
+</div>
+
+<ul class="nav nav-underline">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  </li>
+</ul>
 {% endblock %}
