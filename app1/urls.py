@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin-dialysis-centers/delete/<int:center_id>/', views.delete_dcenter, name='delete_dcenter'),
     path('dialysis-centers/', views.dialysis_center, name='dialysis_center'),
     path('gfr/', views.gfr, name='gfr'),
+    path('diet/', views.diet, name='diet'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

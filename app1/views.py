@@ -191,3 +191,6 @@ def dialysis_center(request):
 
 def gfr(request):
     return render(request, "gfr.html")
+
+def diet(request):
+    return render(request, 'diet.html')
