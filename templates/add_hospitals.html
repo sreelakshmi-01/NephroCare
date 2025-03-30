@@ -128,10 +128,10 @@
             <td>{{ hosp.city }}</td>
             <td>{{ hosp.district }}</td>
             <td>{{ hosp.email }}</td>
-            <td>{{ hosp.phone_number }}</td>
+            <td>{{ hosp.phone_no }}</td>
             <td>
-                <a href="#">Edit</a> |
-                <a href="#" onclick="return confirm('Are you sure?');">Delete</a>
+                <a href="{% url 'edit_hospitals' %}">Edit</a> |
+                <a href="{% url 'dlt_hospitals' %}" onclick="return confirm('Are you sure?');">Delete</a>
             </td>
         </tr>
         {% endfor %}

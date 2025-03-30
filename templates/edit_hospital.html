@@ -1,0 +1,13 @@
+{% extends 'adminbase.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Edit Hospital</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Hospital</button>
+    </form>
+    <a href="{% url 'add_hospitals' %}">Back to List</a>
+</div>
+{% endblock %}

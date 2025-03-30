@@ -206,3 +206,20 @@ def add_hospital(request):
         form = HospitalForm()
 
     return render(request, 'add_hospitals.html', {'form': form, 'hosps': hosps})
+
+def edit_hosp(request, hosp_id):
+    hosp = get_object_or_404(Hospital, id=hosp_id)
+    if request.method == 'POST':
+        form = HospitalForm(request.POST, instance=hosp)
+        if form.is_valid():
+            form.save()
+            return redirect('add_hospitals')
+    else:
+        form = HospitalForm(instance=hosp)
+
+    return render(request, 'edit_hospital.html', {'form': form, 'hosp': hosp})
+
+def delete_hosp(request, hosp_id):
+    hosp = get_object_or_404(Hospital, id=hosp_id)
+    hosp.delete()
+    return redirect('add_hospitals')
