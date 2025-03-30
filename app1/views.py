@@ -196,4 +196,13 @@ def diet(request):
     return render(request, 'diet.html')
 
 def add_hospital(request):
-    return render(request, 'add_hospitals.html')
+    hosps = Hospital.objects.all()
+    if request.method == 'POST':
+        form = HospitalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_hospitals')
+    else:
+        form = HospitalForm()
+
+    return render(request, 'add_hospitals.html', {'form': form, 'hosps': hosps})
