@@ -194,3 +194,6 @@ def gfr(request):
 
 def diet(request):
     return render(request, 'diet.html')
+
+def add_hospital(request):
+    return render(request, 'add_hospitals.html')
