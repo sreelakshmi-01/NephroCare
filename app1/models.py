@@ -46,7 +46,7 @@ class DialysisCenter(models.Model):
 class Hospital(models.Model):
     id = models.AutoField(primary_key = True)
     hosp_name = models.CharField(max_length=255)
-    city = models.CharField(max_length=255, null=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
     district = models.CharField(max_length=255)
     phone_no = models.CharField(max_length=15)
     email = models.EmailField(unique=True)
