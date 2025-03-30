@@ -19,10 +19,12 @@ class FAQForm(forms.ModelForm):
             super().__init__(*args, **kwargs)
             self.fields['question'].label = False
 
-from django import forms
-from .models import DialysisCenter
-
 class DialysisCenterForm(forms.ModelForm):
     class Meta:
         model = DialysisCenter
         fields = ['name', 'full_address', 'district', 'email', 'phone_number']
+
+class HospitalForm(forms.ModelForm):
+    class Meta:
+        model = Hospital
+        fields = ['hosp_name', 'city', 'district', 'email', 'phone_no']
