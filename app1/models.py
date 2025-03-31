@@ -54,14 +54,14 @@ class Hospital(models.Model):
 
 class Doctor(models.Model):
     id = models.AutoField(primary_key=True)
-    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)  # Dropdown selection
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     specialization = models.CharField(max_length=255)
     qualification = models.CharField(max_length=255)
     experience = models.PositiveIntegerField(help_text="Years of experience")
     phone_no = models.CharField(max_length=15)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)  # Not hashed (but should be hashed during processing)
+    password = models.CharField(max_length=255)
 
     def __str__(self):
         return f"{self.name} - {self.specialization}"

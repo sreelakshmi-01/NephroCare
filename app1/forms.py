@@ -28,3 +28,8 @@ class HospitalForm(forms.ModelForm):
     class Meta:
         model = Hospital
         fields = ['hosp_name', 'city', 'district', 'email', 'phone_no']
+
+class DoctorForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        fields = __all__
