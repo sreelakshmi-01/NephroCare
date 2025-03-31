@@ -223,3 +223,16 @@ def delete_hosp(request, hosp_id):
     hosp = get_object_or_404(Hospital, id=hosp_id)
     hosp.delete()
     return redirect('add_hospitals')
+
+def hospital_list(request):
+    # Fetch unique districts from the database
+    districts = Hospital.objects.values_list('district', flat=True).distinct()
+
+    # Apply filter if a district is selected
+    selected_district = request.GET.get('district')
+    if selected_district:
+        centers = Hospital.objects.filter(district=selected_district)
+    else:
+        centers = Hospital.objects.all()
+
+    return render(request, 'book_appointment.html', {'hosps': hosps, 'districts': districts})
