@@ -32,4 +32,7 @@ class HospitalForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = __all__
+        fields = ['hospital', 'name', 'specialization', 'qualification', 'experience', 'phone_no', 'email', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
