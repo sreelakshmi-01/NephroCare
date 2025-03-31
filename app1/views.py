@@ -231,8 +231,8 @@ def hospital_list(request):
     # Apply filter if a district is selected
     selected_district = request.GET.get('district')
     if selected_district:
-        centers = Hospital.objects.filter(district=selected_district)
+        hosps = Hospital.objects.filter(district=selected_district)
     else:
-        centers = Hospital.objects.all()
+        hosps = Hospital.objects.all()
 
     return render(request, 'book_appointment.html', {'hosps': hosps, 'districts': districts})
