@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
+from django.contrib import messages
+from django.db import transaction
 
 # User home view
 def userhome(request):
@@ -237,18 +239,36 @@ def hospital_list(request):
 
     return render(request, 'book_appointment.html', {'hosps': hosps, 'districts': districts})
 
-def doctor_registration(request):
-    hospitals = Hospital.objects.all()
 
-    if request.method == "POST":
+def doctor_registration(request):
+    if request.method == 'POST':
         form = DoctorForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            try:
+                with transaction.atomic():
+                    doctor = form.save()
+
+                    # Create user entry in the User table
+                    User.objects.create(
+                        name=doctor.name,
+                        email=doctor.email,
+                        password=doctor.password,
+                        role='doctor'
+                    )
+
+                    messages.success(request, "Doctor registered successfully!")
+                    return redirect('login')
+            except Exception as e:
+                messages.error(request, f"Error: {str(e)}")
+        else:
+            print(form.errors)  # Debugging: Print form errors in console
+            messages.error(request, "Invalid form data.")
     else:
         form = DoctorForm()
 
+    hospitals = Hospital.objects.all()
     return render(request, 'doctor_register.html', {'form': form, 'hospitals': hospitals})
+
 
 def doctor_dashboard(request):
     return render(request, 'doctor_home.html')
