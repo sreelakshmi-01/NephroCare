@@ -236,3 +236,16 @@ def hospital_list(request):
         hosps = Hospital.objects.all()
 
     return render(request, 'book_appointment.html', {'hosps': hosps, 'districts': districts})
+
+def doctor_registration(request):
+    hospitals = Hospital.objects.all() 
+
+    if request.method == "POST":
+        form = DoctorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = DoctorForm()
+
+    return render(request, 'doctor_register.html', {'form': form, 'hospitals': hospitals})
