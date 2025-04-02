@@ -238,7 +238,7 @@ def hospital_list(request):
     return render(request, 'book_appointment.html', {'hosps': hosps, 'districts': districts})
 
 def doctor_registration(request):
-    hospitals = Hospital.objects.all() 
+    hospitals = Hospital.objects.all()
 
     if request.method == "POST":
         form = DoctorForm(request.POST)
@@ -249,3 +249,6 @@ def doctor_registration(request):
         form = DoctorForm()
 
     return render(request, 'doctor_register.html', {'form': form, 'hospitals': hospitals})
+
+def doctor_dashboard(request):
+    return render(request, 'doctor_home.html')
