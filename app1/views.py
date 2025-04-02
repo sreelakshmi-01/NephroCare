@@ -135,7 +135,8 @@ def login_view(request):
                 request.session['user_id'] = user.id  # Store user session
                 request.session['user_role'] = user.role  # Store role for redirection
 
-                return redirect('adminbase' if user.role == "admin" else 'userhome')
+                return redirect('adminbase' if user.role == "admin" else 'doctor_dashboard' if user.role == "doctor" else 'userhome')
+
             else:
                 messages.error(request, "Invalid password")
         except User.DoesNotExist:
