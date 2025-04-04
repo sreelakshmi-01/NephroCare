@@ -28,5 +28,6 @@ urlpatterns = [
     path('admin-add-hospitals/delete/<int:hosp_id>/', views.delete_hosp, name = 'dlt_hospitals'),
     path('admin-add-hospitals/', views.add_hospital, name = 'add_hospitals'),
     path('hospitals/', views.hospital_list, name='hospital_list'),
-    path('doctor-dashboard/', views.doctor_dashboard, name = 'doctor_dashboard')
+    path('doctor-dashboard/', views.doctor_dashboard, name = 'doctor_dashboard'),
+    path('doctors/<int:hosp_id>/', views.doctor_list, name = 'doctors_list'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

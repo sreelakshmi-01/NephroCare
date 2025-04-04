@@ -288,3 +288,7 @@ def doctor_dashboard(request):
         return redirect('login')
 
     return render(request, 'doctor_home.html', {'doctor': doctor})
+
+def doctor_list(request, hosp_id):
+    doctors = Doctor.objects.filter(hospital_id = hosp_id)
+    return render(request, 'doctor_list.html', {'doctors': doctors})
