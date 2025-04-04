@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -91,11 +92,31 @@
         .main-content {
             flex-grow: 1;
             padding: 40px;
+            position: relative;
         }
 
         .main-content h2 {
             font-size: 28px;
             color: #333;
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: #E74C3C;
         }
     </style>
 </head>
@@ -103,7 +124,9 @@
     <!-- Sidebar for Doctor Profile -->
     <div class="sidebar">
         <div class="profile-card">
-            <div class="profile-img"></div>
+            <div class="profile-img" >
+                <img class="profile-img" src="{% static 'img/doctor.png' %}" alt="Doctor Profile">
+            </div>
             <div class="profile-name">Dr. {{ doctor.name }}</div>
             <div class="specialization">{{ doctor.specialization }}</div>
 
@@ -122,6 +145,7 @@
 
     <!-- Main Content -->
     <div class="main-content">
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
         <h2>Welcome, Dr. {{ doctor.name }}</h2>
     </div>
 </body>
