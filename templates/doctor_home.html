@@ -18,7 +18,7 @@
             background: #F5F5F5;
         }
 
-        /* Left Section - Profile Card */
+        /* Sidebar - Profile */
         .sidebar {
             width: 25%;
             background: #83BAFF;
@@ -87,7 +87,7 @@
             background: #27AE60;
         }
 
-        /* Right Section */
+        /* Main Content */
         .main-content {
             flex-grow: 1;
             padding: 40px;
@@ -104,14 +104,14 @@
     <div class="sidebar">
         <div class="profile-card">
             <div class="profile-img"></div>
-            <div class="profile-name">Dr. John Doe</div>
-            <div class="specialization">Cardiologist</div>
+            <div class="profile-name">Dr. {{ doctor.name }}</div>
+            <div class="specialization">{{ doctor.specialization }}</div>
 
             <div class="profile-details">
-                <p><strong>Qualification:</strong> MBBS, MD</p>
-                <p><strong>Experience:</strong> 10 years</p>
-                <p><strong>Phone:</strong> +91 9876543210</p>
-                <p><strong>Email:</strong> doctor@example.com</p>
+                <p><strong>Qualification:</strong> {{ doctor.qualification }}</p>
+                <p><strong>Experience:</strong> {{ doctor.experience }} years</p>
+                <p><strong>Phone:</strong> {{ doctor.phone_no }}</p>
+                <p><strong>Email:</strong> {{ doctor.email }}</p>
             </div>
 
             <div class="toggle-container">
@@ -122,7 +122,7 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <h2>Welcome, Dr. John Doe</h2>
+        <h2>Welcome, Dr. {{ doctor.name }}</h2>
     </div>
 </body>
 </html>

@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.db import transaction
+from django.contrib.auth.decorators import login_required
 
 # User home view
 def userhome(request):
@@ -124,6 +125,7 @@ def register(request):
 
     return render(request, "user_register.html")
 
+
 def login_view(request):
     if request.method == "POST":
         email = request.POST.get('email')
@@ -134,8 +136,13 @@ def login_view(request):
             if user.password == password:  # No hashing for now
                 request.session['user_id'] = user.id  # Store user session
                 request.session['user_role'] = user.role  # Store role for redirection
+                request.session['email'] = user.email  # Store email for fetching doctor data
 
-                return redirect('adminbase' if user.role == "admin" else 'doctor_dashboard' if user.role == "doctor" else 'userhome')
+                # Debugging
+                print(f"User role in session: {request.session.get('user_role')}")
+
+                return redirect(
+                    'adminbase' if user.role == "admin" else 'doctor_dashboard' if user.role == "doctor" else 'userhome')
 
             else:
                 messages.error(request, "Invalid password")
@@ -143,7 +150,6 @@ def login_view(request):
             messages.error(request, "User does not exist")
 
     return render(request, "login.html")
-
 
 def logout_view(request):
     request.session.flush()
@@ -272,4 +278,13 @@ def doctor_registration(request):
 
 
 def doctor_dashboard(request):
-    return render(request, 'doctor_home.html')
+    if 'user_id' not in request.session or request.session.get('user_role') != 'doctor':
+        return redirect('login')  # Redirect if not logged in or wrong role
+
+    try:
+        doctor = Doctor.objects.get(email=request.session.get('email'))
+    except Doctor.DoesNotExist:
+        messages.error(request, "Doctor profile not found!")
+        return redirect('login')
+
+    return render(request, 'doctor_home.html', {'doctor': doctor})
