@@ -108,6 +108,27 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+        .register-label {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        .register-label a {
+            font-size: 14px;
+            color: #777; /* Light, readable color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .register-label a:hover {
+            color: #333; /* Darker shade on hover */
+            text-decoration: underline;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -132,7 +153,15 @@
 
         <button type="submit" class="login-btn">Login</button>
 
-        <p class="register-link">Don't have an Account? <a href="{% url 'register' %}">Register Here</a></p>
+        <p class="register-label">
+            Don't have an Account?
+            <br>
+            <a href="{% url 'register' %}">Register as User</a> |
+            <a href="{% url 'doctor_register' %}">Register as Doctor</a>
+        </p>
+
+
+
     </form>
     </div>
 </body>
