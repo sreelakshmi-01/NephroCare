@@ -62,6 +62,7 @@ class Doctor(models.Model):
     phone_no = models.CharField(max_length=15)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
+    status = models.CharField(max_length=10, default="Yes")
 
     def __str__(self):
         return f"{self.name} - {self.specialization}"

@@ -118,6 +118,42 @@
         .logout-btn:hover {
             background: #E74C3C;
         }
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 60px;
+          height: 34px;
+        }
+        .switch input { display: none; }
+
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0; left: 0;
+          right: 0; bottom: 0;
+          background-color: #ccc;
+          transition: 0.4s;
+          border-radius: 34px;
+        }
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 26px; width: 26px;
+          left: 4px; bottom: 4px;
+          background-color: white;
+          transition: 0.4s;
+          border-radius: 50%;
+        }
+        input:checked + .slider {
+          background-color: #2ECC71;
+        }
+        input:not(:checked) + .slider {
+          background-color: #FF5733;
+        }
+        input:checked + .slider:before {
+          transform: translateX(26px);
+        }
+
     </style>
 </head>
 <body>
@@ -138,8 +174,15 @@
             </div>
 
             <div class="toggle-container">
-                <button class="toggle-btn">Available</button>
+                <label class="switch">
+                    <input type="checkbox" id="statusToggle" {% if doctor.status == "Yes" %}checked{% endif %}>
+                    <span class="slider round"></span>
+                </label>
+                <p id="statusText" style="margin-top: 10px; {% if doctor.status == 'Yes' %}color: green;{% else %}color: red;{% endif %}">
+                    {{ doctor.status }}
+                </p>
             </div>
+
         </div>
     </div>
 
@@ -148,5 +191,24 @@
         <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
         <h2>Welcome, Dr. {{ doctor.name }}</h2>
     </div>
+
+    <script>
+document.getElementById("statusToggle").addEventListener("change", function () {
+    fetch("{% url 'toggle_doctor_status' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("statusText").textContent = data.status;
+        document.getElementById("statusText").style.color = data.status === "Yes" ? "green" : "red";
+    });
+});
+</script>
+
 </body>
 </html>
