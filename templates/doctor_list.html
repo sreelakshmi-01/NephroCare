@@ -57,6 +57,10 @@
         background: #27AE60;
         font-weight: bold;
     }
+    .disabled {
+        opacity: 0.6;
+    }
+
 </style>
 
 <div class="doctor-container">
@@ -67,7 +71,12 @@
         <p><strong>Experience:</strong> {{ doctor.experience }} years</p>
         <p><strong>Phone:</strong> {{ doctor.phone_no }}</p>
         <p><strong>Email:</strong> {{ doctor.email }}</p>
-        <a href="#" class="btn btn-appointment">Book Now</a>
+        {% if doctor.status == "Yes" %}
+            <a href="#" class="btn btn-appointment">Book Now</a>
+        {% else %}
+            <a class="btn btn-appointment disabled" style="pointer-events: none; background-color: grey; cursor: not-allowed;">Not Available</a>
+        {% endif %}
+
     </div>
     {% endfor %}
 </div>
