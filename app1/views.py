@@ -306,9 +306,6 @@ def toggle_doctor_status(request):
 def doctor_list(request, hosp_id):
     doctors = Doctor.objects.filter(hospital_id = hosp_id)
     return render(request, 'doctor_list.html', {'doctors': doctors})
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Hospital, Doctor, Appointment
-from django.contrib import messages
 
 def book(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
@@ -343,9 +340,14 @@ def book(request, doctor_id):
             timing=timing
         )
         messages.success(request, 'Appointment booked successfully!')
-        return redirect('book')
+        return redirect('book', doctor_id=doctor.id)
+
+    # ✅ GET request: Fetch appointments for this doctor (or all if needed)
+    appointments = Appointment.objects.filter(doctor=doctor).order_by('-date')
 
     return render(request, 'booking_page.html', {
         'doctor': doctor,
         'hospital': hospital,
+        'appointments': appointments,  # ✅ Now passed to the template
     })
+
