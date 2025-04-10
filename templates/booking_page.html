@@ -3,69 +3,74 @@
 
 <div class="container mt-5">
   <div class="card p-4 shadow-sm" style="background-color: #f2f2f2;">
-    <h4 class="mb-4">Book Appointment</h4>
-    <form method="POST">
-      {% csrf_token %}
-      <div class="row g-3">
-        <div class="col-md-4">
-          <input type="text" class="form-control" placeholder="Name" name="name">
-        </div>
-        <div class="col-md-4">
-          <input type="text" class="form-control" placeholder="Mobile No." name="mobile">
-        </div>
-        <div class="col-md-4">
-          <input type="text" class="form-control" value="Aster Medcity" readonly>
-        </div>
-
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Age" name="age">
-        </div>
-        <div class="col-md-2">
-          <select class="form-select" name="gender">
-            <option selected disabled>Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <input type="email" class="form-control" placeholder="Email" name="email">
-        </div>
-        <div class="col-md-4">
-          <input type="text" class="form-control" value="Dr. Anna Maria" readonly>
-        </div>
-
-        <div class="col-12">
-          <textarea class="form-control" rows="2" placeholder="Address" name="address"></textarea>
-        </div>
-
-        <div class="col-md-4">
-          <input type="text" class="form-control" value="Nephrologist" readonly>
-        </div>
-        <div class="col-md-4">
-          <input type="date" class="form-control" name="date">
-        </div>
-        <div class="col-md-4">
-          <input type="text" class="form-control" placeholder="Select Timing" name="timing">
-        </div>
-
-        <div class="col-md-4">
-          <input type="text" class="form-control" placeholder="State" name="state">
-        </div>
-        <div class="col-md-4">
-          <input type="text" class="form-control" placeholder="City" name="city">
-        </div>
-        <div class="col-md-4">
-          <input type="text" class="form-control" placeholder="Pincode" name="pincode">
-        </div>
-
-        <div class="col-12 d-flex justify-content-center gap-3 mt-3">
-          <button type="submit" class="btn btn-primary">Book Appointment</button>
-          <a href="{% url 'hospital_list' %}" class="btn btn-primary">View Doctors</a>
-        </div>
+  <h4 class="mb-4">Book Appointment</h4>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Name" name="name" required>
       </div>
-    </form>
-  </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Mobile No." name="mobile" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" value="{{ hospital.hosp_name }}" readonly>
+      </div>
+
+      <div class="col-md-2">
+        <input type="text" class="form-control" placeholder="Age" name="age" required>
+      </div>
+      <div class="col-md-2">
+        <select class="form-select" name="gender" required>
+          <option selected disabled>Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <input type="email" class="form-control" placeholder="Email" name="email" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" value="{{ doctor.name }}" readonly>
+      </div>
+
+      <div class="col-12">
+        <textarea class="form-control" rows="2" placeholder="Address" name="address" required></textarea>
+      </div>
+
+      <div class="col-md-4">
+        <input type="text" class="form-control" value="{{ doctor.specialization }}" readonly>
+      </div>
+      <div class="col-md-4">
+        <input type="date" class="form-control" name="date" required>
+      </div>
+      <div class="col-md-4">
+        <select class="form-select" name="timing" required>
+          <option selected disabled>Select Timing</option>
+          <option value="Forenoon">Forenoon</option>
+          <option value="Afternoon">Afternoon</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="State" name="state" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="City" name="city" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Pincode" name="pincode" required>
+      </div>
+
+      <div class="col-12 d-flex justify-content-center gap-3 mt-3">
+        <button type="submit" class="btn btn-primary">Book Appointment</button>
+        <a href="{% url 'hospital_list' %}" class="btn btn-primary">View Doctors</a>
+      </div>
+    </div>
+  </form>
+</div>
+
 
   <div class="mt-5">
     <table class="table table-bordered">
