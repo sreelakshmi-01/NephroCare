@@ -72,7 +72,7 @@
         <p><strong>Phone:</strong> {{ doctor.phone_no }}</p>
         <p><strong>Email:</strong> {{ doctor.email }}</p>
         {% if doctor.status == "Yes" %}
-            <a href="#" class="btn btn-appointment">Book Now</a>
+            <a href="{% url 'book' %}" class="btn btn-appointment">Book Now</a>
         {% else %}
             <a class="btn btn-appointment disabled" style="pointer-events: none; background-color: grey; cursor: not-allowed;">Not Available</a>
         {% endif %}

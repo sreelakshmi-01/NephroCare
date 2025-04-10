@@ -66,3 +66,35 @@ class Doctor(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.specialization}"
+
+class Appointment(models.Model):
+    TIMING_CHOICES = [
+        ('Forenoon', 'Forenoon'),
+        ('Afternoon', 'Afternoon'),
+    ]
+
+    GENDER_CHOICES = [
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    ]
+
+    name = models.CharField(max_length=100)
+    mobile = models.CharField(max_length=15)
+    email = models.EmailField()
+    age = models.PositiveIntegerField()
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    address = models.TextField()
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    pincode = models.CharField(max_length=10)
+
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+
+    date = models.DateField()
+    timing = models.CharField(max_length=20, choices=TIMING_CHOICES)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.doctor.name} - {self.date}"

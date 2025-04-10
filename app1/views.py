@@ -306,3 +306,5 @@ def toggle_doctor_status(request):
 def doctor_list(request, hosp_id):
     doctors = Doctor.objects.filter(hospital_id = hosp_id)
     return render(request, 'doctor_list.html', {'doctors': doctors})
+def book(request):
+    return render(request,'booking_page.html')
