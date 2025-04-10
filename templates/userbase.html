@@ -24,6 +24,7 @@
         .navbar {
             background-color: #ffffff;
             padding: 10px 0;
+            margin-bottom:20px;
         }
 
         .navbar a {
@@ -135,13 +136,18 @@
                     <li class="nav-item"><a class="nav-link" href="{%url 'hospital_list'%}">Book Appointment</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Medicine Purchase</a></li>
                     <li class="nav-item"><a class="nav-link" href="{%url 'profile'%}">Profile</a></li>
+                    {% if request.session.user_id %}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-danger text-white ms-3" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Content Section -->
-    <div class="container mt-4">
+    <div class="container mt-3">
         {% block content %}{% endblock %}
     </div>
 

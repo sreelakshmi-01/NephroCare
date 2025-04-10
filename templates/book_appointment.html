@@ -3,20 +3,61 @@
 {% block content %}
 
 <style>
+    .search-wrapper {
+        width: 90%;
+        margin: 80px auto 40px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 30px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .autocomplete-items {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #ccc;
+        z-index: 1000;
+        max-height: 200px;
+        overflow-y: auto;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .autocomplete-items div {
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .autocomplete-items div:hover {
+        background-color: #f1f1f1;
+    }
+
     .hospital-container {
         width: 90%;
-        margin: 70px auto 40px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
+        margin: 20px auto 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 20px;
     }
 
     .hospital-card {
         background: #fff;
         border-radius: 12px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
         padding: 20px;
         text-align: center;
         transition: 0.3s;
@@ -58,12 +99,18 @@
         color: white;
         font-weight: bold;
     }
-
 </style>
 
-<div class="hospital-container">
+<div class="search-wrapper">
+    <div class="search-box">
+        <input type="text" id="hospitalSearch" placeholder="Search hospital by name..." autocomplete="off">
+        <div id="autocomplete-list" class="autocomplete-items"></div>
+    </div>
+</div>
+
+<div class="hospital-container" id="hospitalContainer">
     {% for hosp in hosps %}
-    <div class="hospital-card">
+    <div class="hospital-card" data-name="{{ hosp.hosp_name|lower }}">
         <h3>{{ hosp.hosp_name }}</h3>
         <p><strong>City:</strong> {{ hosp.city }}</p>
         <p><strong>District:</strong> {{ hosp.district }}</p>
@@ -73,5 +120,53 @@
     </div>
     {% endfor %}
 </div>
+
+<script>
+    const searchInput = document.getElementById('hospitalSearch');
+    const autocompleteList = document.getElementById('autocomplete-list');
+    const hospitalCards = document.querySelectorAll('.hospital-card');
+
+    searchInput.addEventListener('input', function () {
+        const inputValue = this.value.toLowerCase();
+        autocompleteList.innerHTML = '';
+
+        if (!inputValue) {
+            hospitalCards.forEach(card => card.style.display = 'block');
+            return;
+        }
+
+        const matches = [];
+
+        hospitalCards.forEach(card => {
+            const name = card.getAttribute('data-name');
+            if (name.includes(inputValue)) {
+                card.style.display = 'block';
+                matches.push(name);
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        const uniqueMatches = [...new Set(matches)];
+        uniqueMatches.forEach(match => {
+            const item = document.createElement('div');
+            item.textContent = match.charAt(0).toUpperCase() + match.slice(1);
+            item.addEventListener('click', () => {
+                searchInput.value = match;
+                autocompleteList.innerHTML = '';
+                hospitalCards.forEach(card => {
+                    card.style.display = card.getAttribute('data-name') === match ? 'block' : 'none';
+                });
+            });
+            autocompleteList.appendChild(item);
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+        if (e.target !== searchInput) {
+            autocompleteList.innerHTML = '';
+        }
+    });
+</script>
 
 {% endblock %}

@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block content %}
+
 <div class="container-fluid">
-  <div class="row">
+  <div class="row" style="margin-top:80px;">
     <!-- Sidebar -->
-    <div class="col-md-3">
-      <div class="card shadow-sm" style="height: 100vh; background-color: #f8f9fa;">
+    <div class="col-md-3" style="margin-top:15px;">
+      <div class="card shadow-sm" style="height: 80vh; background-color: #f8f9fa;">
         <div class="card-body">
           <h5 class="card-title">Dashboard</h5>
           <ul class="nav flex-column">
@@ -34,10 +35,6 @@
           <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" name="email" class="form-control" value="{{ user.email }}" readonly>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" value="{{ user.password }}" required>
           </div>
           <button type="submit" class="btn btn-primary">Update Profile</button>
         </form>
