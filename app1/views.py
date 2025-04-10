@@ -351,3 +351,18 @@ def book(request, doctor_id):
         'appointments': appointments,  # ✅ Now passed to the template
     })
 
+def profile_view(request):
+    user_id = request.session.get('user_id')
+    if not user_id:
+        messages.error(request, "You must be logged in to access this page.")
+        return redirect('login')
+
+    user = get_object_or_404(User, id=user_id)
+
+    if request.method == "POST":
+        user.name = request.POST.get("name")
+        user.password = request.POST.get("password")  # No password hashing for now
+        user.save()
+        messages.success(request, "Profile updated successfully!")
+
+    return render(request, "profile.html", {"user": user})

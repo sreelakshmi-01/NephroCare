@@ -1,0 +1,48 @@
+{% extends 'userbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <div class="card shadow-sm" style="height: 100vh; background-color: #f8f9fa;">
+        <div class="card-body">
+          <h5 class="card-title">Dashboard</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a class="nav-link text-dark" href="#">Appointments</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a class="nav-link text-dark" href="#">Medicines</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+      <div class="card shadow-sm mt-3 p-4">
+        <h4 class="mb-4">My Profile</h4>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" value="{{ user.name }}" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" value="{{ user.email }}" readonly>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" value="{{ user.password }}" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
