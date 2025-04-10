@@ -306,5 +306,46 @@ def toggle_doctor_status(request):
 def doctor_list(request, hosp_id):
     doctors = Doctor.objects.filter(hospital_id = hosp_id)
     return render(request, 'doctor_list.html', {'doctors': doctors})
-def book(request):
-    return render(request,'booking_page.html')
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Hospital, Doctor, Appointment
+from django.contrib import messages
+
+def book(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    hospital = doctor.hospital
+
+    if request.method == 'POST':
+        name = request.POST['name']
+        mobile = request.POST['mobile']
+        email = request.POST['email']
+        age = request.POST['age']
+        gender = request.POST['gender']
+        address = request.POST['address']
+        state = request.POST['state']
+        city = request.POST['city']
+        pincode = request.POST['pincode']
+        date = request.POST['date']
+        timing = request.POST['timing']
+
+        Appointment.objects.create(
+            name=name,
+            mobile=mobile,
+            email=email,
+            age=age,
+            gender=gender,
+            address=address,
+            state=state,
+            city=city,
+            pincode=pincode,
+            hospital=hospital,
+            doctor=doctor,
+            date=date,
+            timing=timing
+        )
+        messages.success(request, 'Appointment booked successfully!')
+        return redirect('book')
+
+    return render(request, 'booking_page.html', {
+        'doctor': doctor,
+        'hospital': hospital,
+    })
