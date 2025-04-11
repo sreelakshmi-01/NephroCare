@@ -173,7 +173,7 @@ def edit_dcenter(request, center_id):
         form = DialysisCenterForm(request.POST, instance=center)
         if form.is_valid():
             form.save()
-            return redirect('add_dcenter')  # Redirect back to main page
+            return redirect('add_dcenter')
     else:
         form = DialysisCenterForm(instance=center)
 
