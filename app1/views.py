@@ -312,10 +312,12 @@ def book(request, doctor_id):
         messages.error(request, "You must be logged in to book an appointment.")
         return redirect('login')
 
+    user = get_object_or_404(User, id=request.session['user_id'])
     doctor = get_object_or_404(Doctor, id=doctor_id)
     hospital = doctor.hospital
 
     if request.method == 'POST':
+        user_id = user_id
         name = request.POST['name']
         mobile = request.POST['mobile']
         email = request.POST['email']
@@ -352,7 +354,8 @@ def book(request, doctor_id):
     return render(request, 'booking_page.html', {
         'doctor': doctor,
         'hospital': hospital,
-        'appointments': appointments,  # ✅ Now passed to the template
+        'appointments': appointments,
+        'user_id': user_id,
     })
 
 def profile_view(request):
