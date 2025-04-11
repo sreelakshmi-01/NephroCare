@@ -33,4 +33,4 @@ urlpatterns = [
     path('toggle-status/', views.toggle_doctor_status, name='toggle_doctor_status'),
     path('booking/<int:doctor_id>/',views.book, name='book'),
     path('profile/', views.profile_view, name='profile'),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
