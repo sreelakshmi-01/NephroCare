@@ -308,6 +308,10 @@ def doctor_list(request, hosp_id):
     return render(request, 'doctor_list.html', {'doctors': doctors})
 
 def book(request, doctor_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "You must be logged in to book an appointment.")
+        return redirect('login')
+
     doctor = get_object_or_404(Doctor, id=doctor_id)
     hospital = doctor.hospital
 

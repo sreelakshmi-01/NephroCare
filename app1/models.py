@@ -77,6 +77,7 @@ class Appointment(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female'),
     ]
+    user = models.ForeignKey('User', on_delete=models.CASCADE, null=True, blank=True, default=None)
 
     name = models.CharField(max_length=100)
     mobile = models.CharField(max_length=15)
