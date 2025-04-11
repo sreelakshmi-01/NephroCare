@@ -313,6 +313,7 @@ def book(request, doctor_id):
         return redirect('login')
 
     user = get_object_or_404(User, id=request.session['user_id'])
+    user_id = request.session.get('user_id')
     doctor = get_object_or_404(Doctor, id=doctor_id)
     hospital = doctor.hospital
 
