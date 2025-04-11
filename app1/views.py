@@ -133,10 +133,10 @@ def login_view(request):
 
         try:
             user = User.objects.get(email=email)
-            if user.password == password:  # No hashing for now
-                request.session['user_id'] = user.id  # Store user session
-                request.session['user_role'] = user.role  # Store role for redirection
-                request.session['email'] = user.email  # Store email for fetching doctor data
+            if user.password == password:
+                request.session['user_id'] = user.id
+                request.session['user_role'] = user.role
+                request.session['email'] = user.email
 
                 # Debugging
                 print(f"User role in session: {request.session.get('user_role')}")
