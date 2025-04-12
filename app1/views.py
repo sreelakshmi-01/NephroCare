@@ -293,10 +293,10 @@ def login_view(request):
                 request.session['user_role'] = user.role
                 request.session['email'] = user.email
 
-                # Debugging
+
                 print(f"User role in session: {request.session.get('user_role')}")
 
-                # 🔁 Redirect to original page if saved
+
                 next_url = request.session.get('next')
                 if next_url:
                     del request.session['next']
@@ -380,7 +380,7 @@ def profile_view(request):
 
     if request.method == "POST":
         user.name = request.POST.get("name")
-        user.password = request.POST.get("password")  # 🔐 Consider hashing later
+        user.password = request.POST.get("password")
         user.save()
         messages.success(request, "Profile updated successfully!")
 
