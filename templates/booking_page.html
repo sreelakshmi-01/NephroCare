@@ -73,6 +73,10 @@
     </div>
   </form>
 </div>
+<script>
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelector('input[name="date"]').setAttribute('min', today);
+</script>
 
 </div>
 
