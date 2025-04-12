@@ -125,32 +125,6 @@ def register(request):
 
     return render(request, "user_register.html")
 
-
-def login_view(request):
-    if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-
-        try:
-            user = User.objects.get(email=email)
-            if user.password == password:
-                request.session['user_id'] = user.id
-                request.session['user_role'] = user.role
-                request.session['email'] = user.email
-
-                # Debugging
-                print(f"User role in session: {request.session.get('user_role')}")
-
-                return redirect(
-                    'adminbase' if user.role == "admin" else 'doctor_dashboard' if user.role == "doctor" else 'userhome')
-
-            else:
-                messages.error(request, "Invalid password")
-        except User.DoesNotExist:
-            messages.error(request, "User does not exist")
-
-    return render(request, "login.html")
-
 def logout_view(request):
     request.session.flush()
     return redirect("login")
@@ -307,18 +281,54 @@ def doctor_list(request, hosp_id):
     doctors = Doctor.objects.filter(hospital_id = hosp_id)
     return render(request, 'doctor_list.html', {'doctors': doctors})
 
+def login_view(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(email=email)
+            if user.password == password:
+                request.session['user_id'] = user.id
+                request.session['user_role'] = user.role
+                request.session['email'] = user.email
+
+                # Debugging
+                print(f"User role in session: {request.session.get('user_role')}")
+
+                # 🔁 Redirect to original page if saved
+                next_url = request.session.get('next')
+                if next_url:
+                    del request.session['next']
+                    return redirect(next_url)
+
+                return redirect(
+                    'adminbase' if user.role == "admin" else
+                    'doctor_dashboard' if user.role == "doctor" else
+                    'userhome'
+                )
+
+            else:
+                messages.error(request, "Invalid password")
+        except User.DoesNotExist:
+            messages.error(request, "User does not exist")
+
+    return render(request, "login.html")
+
+
 def book(request, doctor_id):
+    # 🔐 Require login
     if 'user_id' not in request.session:
         messages.error(request, "You must be logged in to book an appointment.")
+        request.session['next'] = request.path  # 🧭 Save next page for redirection
         return redirect('login')
 
-    user = get_object_or_404(User, id=request.session['user_id'])
     user_id = request.session.get('user_id')
+    user = get_object_or_404(User, id=user_id)
     doctor = get_object_or_404(Doctor, id=doctor_id)
     hospital = doctor.hospital
 
     if request.method == 'POST':
-        user_id = user_id
         name = request.POST['name']
         mobile = request.POST['mobile']
         email = request.POST['email']
@@ -332,6 +342,7 @@ def book(request, doctor_id):
         timing = request.POST['timing']
 
         Appointment.objects.create(
+            user=user,  # 👈 Link the appointment to the logged-in user
             name=name,
             mobile=mobile,
             email=email,
@@ -349,15 +360,15 @@ def book(request, doctor_id):
         messages.success(request, 'Appointment booked successfully!')
         return redirect('book', doctor_id=doctor.id)
 
-    # ✅ GET request: Fetch appointments for this doctor (or all if needed)
     appointments = Appointment.objects.filter(doctor=doctor).order_by('-date')
 
     return render(request, 'booking_page.html', {
         'doctor': doctor,
         'hospital': hospital,
         'appointments': appointments,
-        'user_id': user_id,
+        'user_id': user_id,  # For use in the template
     })
+
 
 def profile_view(request):
     user_id = request.session.get('user_id')
@@ -369,7 +380,7 @@ def profile_view(request):
 
     if request.method == "POST":
         user.name = request.POST.get("name")
-        user.password = request.POST.get("password")  # No password hashing for now
+        user.password = request.POST.get("password")  # 🔐 Consider hashing later
         user.save()
         messages.success(request, "Profile updated successfully!")
 
