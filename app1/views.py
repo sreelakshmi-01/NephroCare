@@ -95,12 +95,12 @@ def admin_faq(request):
         answer = request.POST.get("answer")
         faq = get_object_or_404(FAQ, id=faq_id)
 
-        # Update the FAQ with the provided answer and approve it
+
         faq.answer = answer
         faq.is_approved = True
         faq.save()
 
-        return redirect('admin_faq')  # Redirect to refresh the page after form submission
+        return redirect('admin_faq')
 
     return render(request, 'admin_faq.html', {
         'pending_faqs': pending_faqs,
@@ -118,7 +118,6 @@ def register(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
 
-        # Create and save user to the database
         User.objects.create(name=name, email=email, password=password)
 
         return redirect("login")
