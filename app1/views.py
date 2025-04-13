@@ -229,7 +229,6 @@ def doctor_registration(request):
                 with transaction.atomic():
                     doctor = form.save()
 
-                    # Create user entry in the User table
                     User.objects.create(
                         name=doctor.name,
                         email=doctor.email,
