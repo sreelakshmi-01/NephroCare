@@ -163,7 +163,6 @@ def dialysis_center(request):
     # Fetch unique districts from the database
     districts = DialysisCenter.objects.values_list('district', flat=True).distinct()
 
-    # Apply filter if a district is selected
     selected_district = request.GET.get('district')
     if selected_district:
         centers = DialysisCenter.objects.filter(district=selected_district)
@@ -208,7 +207,6 @@ def delete_hosp(request, hosp_id):
     return redirect('add_hospitals')
 
 def hospital_list(request):
-    # Fetch unique districts from the database
     districts = Hospital.objects.values_list('district', flat=True).distinct()
 
     selected_district = request.GET.get('district')
