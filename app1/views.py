@@ -342,7 +342,7 @@ def book(request, doctor_id):
         timing = request.POST['timing']
 
         Appointment.objects.create(
-            user=user,  # 👈 Link the appointment to the logged-in user
+            user=user,
             name=name,
             mobile=mobile,
             email=email,
