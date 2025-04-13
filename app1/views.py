@@ -253,7 +253,7 @@ def doctor_registration(request):
 
 def doctor_dashboard(request):
     if 'user_id' not in request.session or request.session.get('user_role') != 'doctor':
-        return redirect('login')  # Redirect if not logged in or wrong role
+        return redirect('login')
 
     try:
         doctor = Doctor.objects.get(email=request.session.get('email'))
