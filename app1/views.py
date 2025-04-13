@@ -242,7 +242,6 @@ def doctor_registration(request):
             except Exception as e:
                 messages.error(request, f"Error: {str(e)}")
         else:
-            print(form.errors)  # Debugging: Print form errors in console
             messages.error(request, "Invalid form data.")
     else:
         form = DoctorForm()
