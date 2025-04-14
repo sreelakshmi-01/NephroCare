@@ -323,7 +323,7 @@ def book(request, doctor_id):
     # 🛑 Allow only if user is of role 'user'
     if user.role != 'user':
         messages.error(request, "Only users can book appointments.")
-        return redirect('login')  # Or redirect to a 'not authorized' page if needed
+        return redirect('login')
 
     doctor = get_object_or_404(Doctor, id=doctor_id)
     hospital = doctor.hospital
