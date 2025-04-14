@@ -314,11 +314,17 @@ def book(request, doctor_id):
     # 🔐 Require login
     if 'user_id' not in request.session:
         messages.error(request, "You must be logged in to book an appointment.")
-        request.session['next'] = request.path
+        request.session['next'] = request.path  # Save current path to redirect after login
         return redirect('login')
 
     user_id = request.session.get('user_id')
     user = get_object_or_404(User, id=user_id)
+
+    # 🛑 Allow only if user is of role 'user'
+    if user.role != 'user':
+        messages.error(request, "Only users can book appointments.")
+        return redirect('login')  # Or redirect to a 'not authorized' page if needed
+
     doctor = get_object_or_404(Doctor, id=doctor_id)
     hospital = doctor.hospital
 
@@ -360,7 +366,7 @@ def book(request, doctor_id):
         'doctor': doctor,
         'hospital': hospital,
         'appointments': appointments,
-        'user_id': user_id,  # For use in the template
+        'user_id': user_id,
     })
 
 
