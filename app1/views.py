@@ -314,7 +314,7 @@ def book(request, doctor_id):
     # 🔐 Require login
     if 'user_id' not in request.session:
         messages.error(request, "You must be logged in to book an appointment.")
-        request.session['next'] = request.path  # Save current path to redirect after login
+        request.session['next'] = request.path
         return redirect('login')
 
     user_id = request.session.get('user_id')
