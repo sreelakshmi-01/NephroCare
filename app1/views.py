@@ -73,7 +73,7 @@ def faq(request):
         form = FAQForm(request.POST)
         if form.is_valid():
             form.save()  # Save the form data to the database
-            return redirect('userhome')  # Redirect after successful submission
+            return redirect('userhome')
     else:
         form = FAQForm()
 
@@ -92,7 +92,6 @@ def admin_faq(request):
         answer = request.POST.get("answer")
         faq = get_object_or_404(FAQ, id=faq_id)
 
-        # Update the FAQ with the provided answer and approve it
         faq.answer = answer
         faq.is_approved = True
         faq.save()
