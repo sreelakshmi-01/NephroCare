@@ -81,7 +81,6 @@ def faq(request):
     faqs = FAQ.objects.filter(is_approved=True)
     return render(request, 'userhome.html', {'form': form, 'faqs': faqs})
 
-# View for Admin to Approve & Answer Questions
 def admin_faq(request):
     # Get pending FAQs (not approved)
     pending_faqs = FAQ.objects.filter(is_approved=False)
