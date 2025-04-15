@@ -358,6 +358,11 @@ def book(request, doctor_id):
         'user_id': user_id,
     })
 
+
+from django.contrib.auth.hashers import make_password  # Optional: for secure password saving
+from .models import User, UserProfile
+
+
 def profile_view(request):
     user_id = request.session.get('user_id')
     if not user_id:
@@ -366,14 +371,30 @@ def profile_view(request):
 
     user = get_object_or_404(User, id=user_id)
 
-    if request.method == "POST":
-        user.name = request.POST.get("name")
+    # Get or create user profile
+    profile, created = UserProfile.objects.get_or_create(user=user)
 
-        # Only update password if it is provided
+    if request.method == "POST":
+        # Update User model
+        user.name = request.POST.get("name")
         password = request.POST.get("password")
         if password:
-            user.password = password
+            user.password = password  # Optional: hash with make_password(password)
         user.save()
+
+        # Update Profile model
+        profile.age = request.POST.get("age")
+        profile.phone = request.POST.get("phone")
+        profile.state = request.POST.get("state")
+        profile.city = request.POST.get("city")
+        profile.pincode = request.POST.get("pincode")
+        profile.address = request.POST.get("address")
+        profile.save()
+
         messages.success(request, "Profile updated successfully!")
 
-    return render(request, "profile.html", {"user": user})
+    return render(request, "profile.html", {
+        "user": user,
+        "profile": profile
+    })
+
