@@ -5,7 +5,6 @@ from django.contrib import messages
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 
-# User home view
 def userhome(request):
     if request.method == "POST":
         form = FAQForm(request.POST)
