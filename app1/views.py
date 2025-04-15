@@ -48,7 +48,6 @@ def add_feature(request):
     return render(request, 'add_feature.html', {'form': form, 'features': features})
 
 
-# Edit feature view (for admin to edit a feature)
 def edit_feature(request, id):
     feature = get_object_or_404(Feature, id=id)
     if request.method == 'POST':
