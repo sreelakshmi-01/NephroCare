@@ -11,7 +11,7 @@ def userhome(request):
         form = FAQForm(request.POST)
         if form.is_valid():
             form.save()  # Save the submitted question
-            return redirect('userhome')  # Redirect to avoid resubmission on refresh
+            return redirect('userhome')
     else:
         form = FAQForm()
 
