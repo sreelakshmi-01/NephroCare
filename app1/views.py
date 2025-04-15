@@ -62,7 +62,6 @@ def edit_feature(request, id):
     return render(request, 'edit_feature.html', {'form': form})
 
 
-# Delete feature view (for admin to delete a feature)
 def delete_feature(request, id):
     feature = get_object_or_404(Feature, id=id)
     feature.delete()
