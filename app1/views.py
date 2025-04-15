@@ -33,7 +33,6 @@ def feature_list(request):
     features = Feature.objects.all()
     return render(request, 'add_feature.html', {'features': features})
 
-# Add feature view (for admin to add a new feature)
 def add_feature(request):
     if request.method == "POST":
         form = FeatureForm(request.POST, request.FILES)
