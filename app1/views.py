@@ -15,7 +15,6 @@ def userhome(request):
     else:
         form = FAQForm()
 
-    # Get the approved FAQs to display on the page
     faqs = FAQ.objects.filter(is_approved=True)
     features = Feature.objects.all()
 
