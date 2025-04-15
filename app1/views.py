@@ -379,7 +379,11 @@ def profile_view(request):
 
     if request.method == "POST":
         user.name = request.POST.get("name")
-        user.password = request.POST.get("password")
+
+        # Only update password if it is provided
+        password = request.POST.get("password")
+        if password:
+            user.password = password  # optionally hash it
         user.save()
         messages.success(request, "Profile updated successfully!")
 
