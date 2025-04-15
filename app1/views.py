@@ -368,7 +368,6 @@ def book(request, doctor_id):
         'user_id': user_id,
     })
 
-
 def profile_view(request):
     user_id = request.session.get('user_id')
     if not user_id:
