@@ -157,7 +157,6 @@ def delete_dcenter(request, center_id):
     center.delete()
     return redirect('add_dcenter')
 
-
 def dialysis_center(request):
     # Fetch unique districts from the database
     districts = DialysisCenter.objects.values_list('district', flat=True).distinct()
