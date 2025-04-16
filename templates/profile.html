@@ -2,6 +2,33 @@
 {% load static %}
 
 {% block content %}
+<style>
+  .editable[readonly] {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+  }
+
+  .editable:focus {
+    background-color: #fff;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.25);
+  }
+
+  .editable.editing {
+    background-color: #ffffff !important;
+    border: 1px solid #0d6efd;
+  }
+
+  .editing-mode {
+    border: 2px solid #0d6efd;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    transition: background-color 0.4s ease;
+  }
+</style>
+
 <div class="container-fluid">
   <div class="row" style="margin-top:80px;">
     <!-- Sidebar -->
@@ -23,15 +50,15 @@
 
     <!-- Main Content -->
     <div class="col-md-9">
-      <div class="card shadow-sm mt-3 p-4">
+      <div class="card shadow-sm mt-3 p-4" id="profileCard">
         <h4 class="mb-4">My Profile</h4>
-        <form method="POST">
+        <form method="POST" id="profileForm">
           {% csrf_token %}
           <!-- User Info -->
           <div class="row mb-3">
             <div class="col-md-6">
               <label class="form-label">Name</label>
-              <input type="text" name="name" class="form-control" value="{{ user.name }}" required>
+              <input type="text" name="name" class="form-control editable" value="{{ user.name }}" readonly required>
             </div>
             <div class="col-md-6">
               <label class="form-label">Email</label>
@@ -43,40 +70,68 @@
           <div class="row mb-3">
             <div class="col-md-4">
               <label class="form-label">Age</label>
-              <input type="number" name="age" class="form-control" value="{{ profile.age }}">
+              <input type="number" name="age" class="form-control editable" value="{{ profile.age }}" readonly>
             </div>
             <div class="col-md-4">
               <label class="form-label">Phone Number</label>
-              <input type="text" name="phone" class="form-control" value="{{ profile.phone }}">
+              <input type="text" name="phone" class="form-control editable" value="{{ profile.phone }}" readonly>
             </div>
             <div class="col-md-4">
               <label class="form-label">Pincode</label>
-              <input type="text" name="pincode" class="form-control" value="{{ profile.pincode }}">
+              <input type="text" name="pincode" class="form-control editable" value="{{ profile.pincode }}" readonly>
             </div>
           </div>
 
           <div class="row mb-3">
             <div class="col-md-6">
               <label class="form-label">State</label>
-              <input type="text" name="state" class="form-control" value="{{ profile.state }}">
+              <input type="text" name="state" class="form-control editable" value="{{ profile.state }}" readonly>
             </div>
             <div class="col-md-6">
               <label class="form-label">City</label>
-              <input type="text" name="city" class="form-control" value="{{ profile.city }}">
+              <input type="text" name="city" class="form-control editable" value="{{ profile.city }}" readonly>
             </div>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Address</label>
-            <textarea name="address" class="form-control" rows="2">{{ profile.address }}</textarea>
+            <textarea name="address" class="form-control editable" rows="2" readonly>{{ profile.address }}</textarea>
           </div>
 
           <div class="text-end">
-            <button type="submit" class="btn btn-primary">Update Profile</button>
+            <button type="button" class="btn btn-secondary me-2" id="editBtn">Edit</button>
+            <button type="button" class="btn btn-primary d-none" id="saveBtn">Save</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  const editBtn = document.getElementById("editBtn");
+  const saveBtn = document.getElementById("saveBtn");
+  const form = document.getElementById("profileForm");
+  const editableFields = document.querySelectorAll(".editable");
+  const profileCard = document.getElementById("profileCard");
+
+  editBtn.addEventListener("click", () => {
+    editableFields.forEach(field => {
+      field.removeAttribute("readonly");
+      field.classList.add("editing");
+    });
+    profileCard.classList.add("editing-mode");
+    editBtn.classList.add("d-none");
+    saveBtn.classList.remove("d-none");
+  });
+
+  saveBtn.addEventListener("click", () => {
+    editableFields.forEach(field => {
+      field.setAttribute("readonly", true);
+      field.classList.remove("editing");
+    });
+    profileCard.classList.remove("editing-mode");
+    form.submit();
+  });
+</script>
 {% endblock %}
