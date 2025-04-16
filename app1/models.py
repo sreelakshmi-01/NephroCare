@@ -13,7 +13,7 @@ class Feature(models.Model):
 class FAQ(models.Model):
     question = models.TextField()
     answer = models.TextField(blank=True, null=True)
-    is_approved = models.BooleanField(default=False)  # Admin approval flag
+    is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
