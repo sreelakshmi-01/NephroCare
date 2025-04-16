@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class Feature(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField(upload_to='features/')  # Uploads images to media/features/
+    image = models.ImageField(upload_to='features/')
 
     def __str__(self):
         return self.title
