@@ -317,7 +317,7 @@ def book(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     hospital = doctor.hospital
 
-
+    appointments = Appointment.objects.filter(user=user).order_by('-date')
     if request.method == 'POST':
         name = request.POST['name']
         mobile = request.POST['mobile']
