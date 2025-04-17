@@ -317,6 +317,7 @@ def book(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     hospital = doctor.hospital
 
+
     if request.method == 'POST':
         name = request.POST['name']
         mobile = request.POST['mobile']
@@ -349,8 +350,6 @@ def book(request, doctor_id):
         messages.success(request, 'Appointment booked successfully!')
         return redirect('book', doctor_id=doctor.id)
 
-    appointments = Appointment.objects.filter(doctor=doctor).order_by('-date')
-
     return render(request, 'booking_page.html', {
         'doctor': doctor,
         'hospital': hospital,
@@ -374,6 +373,8 @@ def profile_view(request):
     # Get or create user profile
     profile, created = UserProfile.objects.get_or_create(user=user)
 
+    appointments = Appointment.objects.filter(user=user).order_by('-date')
+
     if request.method == "POST":
         # Update User model
         user.name = request.POST.get("name")
@@ -393,8 +394,11 @@ def profile_view(request):
 
         messages.success(request, "Profile updated successfully!")
 
+        appointments = Appointment.objects.filter(user=user).order_by('-date')
+
     return render(request, "profile.html", {
         "user": user,
-        "profile": profile
+        "profile": profile,
+        "appointments": appointments,
     })
 
