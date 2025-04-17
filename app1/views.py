@@ -301,6 +301,7 @@ def login_view(request):
 
 
 def book(request, doctor_id):
+
     # 🔐 Require login
     if 'user_id' not in request.session:
         messages.error(request, "You must be logged in to book an appointment.")
@@ -319,6 +320,7 @@ def book(request, doctor_id):
 
     appointments = Appointment.objects.filter(user=user).order_by('-date')
     if request.method == 'POST':
+        print("🔔 Form submitted")
         name = request.POST['name']
         mobile = request.POST['mobile']
         email = request.POST['email']
