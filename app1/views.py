@@ -404,4 +404,3 @@ def profile_view(request):
         "appointments": appointments,
     })
 
-wsdefgthj
