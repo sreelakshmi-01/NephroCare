@@ -67,6 +67,26 @@
         transform: translateY(-5px);
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     }
+
+    .stage-section .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .stage-section .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .stage-section .card:hover {
+        transform: scale(1.02);
+    }
+
+    .stage-section .card-body {
+        padding: 20px;
+    }
+
 </style>
 
 <!-- Hero Section -->
@@ -77,52 +97,46 @@
     </div>
 </div>
 
-<!-- Informative Section -->
-<div class="info-section">
-    <h2>Why Diet and Exercise Matter in Kidney Health</h2>
-    <p>
-        Managing kidney disease effectively requires more than just medications. Your diet and physical activity play a critical role
-        in slowing down disease progression and improving overall well-being. Each stage of chronic kidney disease (CKD) has
-        different nutritional needs and activity levels. With the right guidance, you can maintain strength, control symptoms,
-        and live a healthier life. Explore the customized plans below designed specifically for each stage of CKD.
-    </p>
-</div>
+<div class="container stage-section mt-5">
+  <div class="row justify-content-center">
 
-<!-- Stage Selection Section -->
-<div class="container stage-section">
-    <div class="row justify-content-center">
-        <!-- Stage 1-2 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Stage 1 - 2</h5>
-                    <p class="card-text">Mild kidney damage with slightly reduced kidney function.</p>
-                    <a href="#" class="btn btn-danger">View Plan</a>
-                </div>
-            </div>
+    <!-- Stage 1-2 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #FFB3BA;">
+        <img src="{% static 'img/d1.jpeg' %}" class="card-img-top" alt="Stage 1-2 Diet">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold">Stage 1 - 2</h5>
+          <p class="card-text">Mild kidney damage with slightly reduced kidney function. Early prevention can make a difference.</p>
+          <a href="#" class="btn btn-outline-dark">View Plan</a>
         </div>
-
-        <!-- Stage 3-4 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Stage 3 - 4</h5>
-                    <p class="card-text">Moderate to severe kidney damage and reduced function.</p>
-                    <a href="#" class="btn btn-danger">View Plan</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stage 5 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Stage 5</h5>
-                    <p class="card-text">Kidney failure – dialysis or transplant may be needed.</p>
-                    <a href="#" class="btn btn-danger">View Plan</a>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <!-- Stage 3-4 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #BAFFC9;">
+        <img src="{% static 'img/d2.jpeg' %}" class="card-img-top" alt="Stage 3-4 Diet">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold">Stage 3 - 4</h5>
+          <p class="card-text">Moderate to severe kidney damage. Special attention to diet and lifestyle is essential.</p>
+          <a href="#" class="btn btn-outline-dark">View Plan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 5 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100" style="background-color: #BAE1FF;">
+        <img src="{% static 'img/d3.jpeg' %}" class="card-img-top" alt="Stage 5 Diet">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold">Stage 5</h5>
+          <p class="card-text">Kidney failure stage – diet must be strictly regulated. Suitable for dialysis support.</p>
+          <a href="#" class="btn btn-outline-dark">View Plan</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 </div>
 {% endblock %}
