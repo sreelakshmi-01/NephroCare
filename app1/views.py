@@ -406,3 +406,33 @@ def profile_view(request):
 
 def stage_diet(request):
     return render(request, 'stage_diet.html')
+
+def add_stage(request):
+    if request.method == 'POST':
+        form = StageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('add_stage')
+    else:
+        form = StageForm()
+    return render(request, 'add_stage.html', {'form': form})
+
+def add_diet_plan(request):
+    if request.method == 'POST':
+        form = DietPlanForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('add_diet_plan')
+    else:
+        form = DietPlanForm()
+    return render(request, 'add_diet_plan.html', {'form': form})
+
+def add_workout_plan(request):
+    if request.method == 'POST':
+        form = WorkoutPlanForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('add_workout_plan')
+    else:
+        form = WorkoutPlanForm()
+    return render(request, 'add_workout_plan.html', {'form': form})

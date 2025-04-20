@@ -36,3 +36,18 @@ class DoctorForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),
         }
+
+class StageForm(forms.ModelForm):
+    class Meta:
+        model = Stage
+        fields = ['title', 'short_description', 'detailed_description', 'image']
+
+class DietPlanForm(forms.ModelForm):
+    class Meta:
+        model = DietPlan
+        fields = ['stage', 'title', 'short_description', 'detailed_instructions', 'image', 'video_url']
+
+class WorkoutPlanForm(forms.ModelForm):
+    class Meta:
+        model = WorkoutPlan
+        fields = ['stage', 'category', 'duration', 'image', 'video_url']

@@ -124,7 +124,7 @@ from django.db import models
 from django.utils.text import slugify
 
 class Stage(models.Model):
-    title = models.CharField(max_length=100)  # e.g. Stage 1-2
+    title = models.CharField(max_length=100, unique=False)
     short_description = models.TextField()
     detailed_description = models.TextField()
     image = models.ImageField(upload_to='stage_images/')
