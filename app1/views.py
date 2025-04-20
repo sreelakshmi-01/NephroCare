@@ -404,3 +404,5 @@ def profile_view(request):
         "appointments": appointments,
     })
 
+def stage_diet(request):
+    return render(request, 'stage_diet.html')
