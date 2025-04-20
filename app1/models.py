@@ -119,3 +119,42 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.doctor.name} - {self.date}"
+
+from django.db import models
+from django.utils.text import slugify
+
+class Stage(models.Model):
+    title = models.CharField(max_length=100)  # e.g. Stage 1-2
+    short_description = models.TextField()
+    detailed_description = models.TextField()
+    image = models.ImageField(upload_to='stage_images/')
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+class DietPlan(models.Model):
+    stage = models.ForeignKey(Stage, on_delete=models.CASCADE, related_name='diet_plans')
+    title = models.CharField(max_length=100)
+    short_description = models.TextField()
+    detailed_instructions = models.TextField()
+    image = models.ImageField(upload_to='diet_images/')
+    video_url = models.URLField(blank=True, null=True)  # Optional YouTube video etc.
+
+    def __str__(self):
+        return f"{self.title} ({self.stage.title})"
+
+class WorkoutPlan(models.Model):
+    stage = models.ForeignKey(Stage, on_delete=models.CASCADE, related_name='workout_plans')
+    category = models.CharField(max_length=100)
+    duration = models.CharField(max_length=50)  # e.g., "15 minutes"
+    image = models.ImageField(upload_to='workout_images/')
+    video_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.category} ({self.stage.title})"
