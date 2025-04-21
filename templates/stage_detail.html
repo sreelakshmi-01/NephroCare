@@ -18,26 +18,20 @@
             {{ stage.detailed_description }}
         </p>
     </div>
-
-    <!-- Centered overlay text -->
-    <div class="hero-content text-white text-center position-absolute top-10 start-50 translate-middle d-none">
-        <h1>{{ stage.name }}</h1>
-        <p class="lead">{{ stage.description }}</p>
-    </div>
 </div>
 
 <!-- Tabs -->
 <div class="container mt-2 pt-3" style="margin-top: 20px;">
     <div class="d-flex justify-content-center my-3">
-    <ul class="nav nav-tabs" id="dietWorkoutTabs" role="tablist">
-        <li class="nav-item">
-            <button class="nav-link active" id="diet-tab" data-bs-toggle="tab" data-bs-target="#diet" type="button" role="tab">Diet</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" id="workout-tab" data-bs-toggle="tab" data-bs-target="#workout" type="button" role="tab">Workout</button>
-        </li>
-    </ul>
-</div>
+        <ul class="nav nav-tabs" id="dietWorkoutTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="diet-tab" data-bs-toggle="tab" data-bs-target="#diet" type="button" role="tab">Diet</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="workout-tab" data-bs-toggle="tab" data-bs-target="#workout" type="button" role="tab">Workout</button>
+            </li>
+        </ul>
+    </div>
 
     <div class="tab-content mt-4" id="dietWorkoutTabsContent">
         <!-- Diet Tab -->
@@ -79,6 +73,15 @@
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+
+            <!-- CTA to other stages -->
+            <div class="text-center mt-4 p-5" style="background-color: #e6f7ff; border-radius: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h2 class="section-heading" style="color: #004AAD; font-weight:bold;">Explore Diet Plans for Other Stages</h2>
+                <p class="mb-4" style="font-family: 'Montserrat', sans-serif; color: #333;">Explore more stages for tailored diet plans and workouts!</p>
+                <a href="{% url 'stage_detail' 2 %}" class="btn btn-lg btn-primary px-4 py-2" style="border-radius: 5px; background-color: #004AAD; font-size: 18px; transition: background-color 0.3s;">
+                    Next Stage
+                </a>
             </div>
         </div>
 
