@@ -1,0 +1,109 @@
+{% extends 'userbase.html' %}
+{% load static %}
+
+{% block title %}{{ stage.name }} Diet & Workout{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero">
+    <img src="{{ stage.image.url }}" alt="{{ stage.name }}" class="w-100" style="height: 400px; object-fit: cover; filter: brightness(60%);">
+    <div class="hero-content text-white text-center position-absolute top-50 start-50 translate-middle">
+        <h1>{{ stage.name }}</h1>
+        <p class="lead">{{ stage.description }}</p>
+    </div>
+</div>
+
+<!-- Tabs -->
+<div class="container mt-5">
+    <div class="d-flex justify-content-center my-3">
+    <ul class="nav nav-tabs" id="dietWorkoutTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="diet-tab" data-bs-toggle="tab" data-bs-target="#diet" type="button" role="tab">Diet</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="workout-tab" data-bs-toggle="tab" data-bs-target="#workout" type="button" role="tab">Workout</button>
+        </li>
+    </ul>
+</div>
+
+
+    <div class="tab-content mt-4" id="dietWorkoutTabsContent">
+        <!-- Diet Tab -->
+        <div class="tab-pane fade show active" id="diet" role="tabpanel">
+            <div class="row">
+                {% for diet in diet_plans %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ diet.image.url }}" class="card-img-top" alt="{{ diet.title }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ diet.title }}</h5>
+                            <p class="card-text">{{ diet.short_description }}</p>
+                            <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#dietModal{{ diet.id }}">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diet Modal -->
+                <div class="modal fade" id="dietModal{{ diet.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content p-3">
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{ diet.title }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>{{ diet.detailed_instruction|safe }}</p>
+                                {% if diet.video_url %}
+                                <div class="ratio ratio-16x9">
+                                    <iframe src="{{ diet.video_url }}" allowfullscreen></iframe>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Workout Tab -->
+        <div class="tab-pane fade" id="workout" role="tabpanel">
+            <div class="row">
+                {% for workout in workout_plans %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ workout.image.url }}" class="card-img-top" alt="{{ workout.category }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ workout.category }}</h5>
+                            <p class="card-text">Duration: {{ workout.duration }}</p>
+                            <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#workoutModal{{ workout.id }}">Watch</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workout Modal -->
+                <div class="modal fade" id="workoutModal{{ workout.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content p-3">
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{ workout.category }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                {% if workout.video_url %}
+                                <div class="ratio ratio-16x9">
+                                    <iframe src="{{ workout.video_url }}" allowfullscreen></iframe>
+                                </div>
+                                {% else %}
+                                <p>No video available.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

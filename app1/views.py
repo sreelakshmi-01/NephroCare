@@ -404,8 +404,6 @@ def profile_view(request):
         "appointments": appointments,
     })
 
-
-
 def add_stage(request):
     if request.method == 'POST':
         form = StageForm(request.POST, request.FILES)
@@ -435,3 +433,13 @@ def add_workout_plan(request):
     else:
         form = WorkoutPlanForm()
     return render(request, 'add_workout_plan.html', {'form': form})
+
+def stage_detail(request, stage_id):
+    stage = get_object_or_404(Stage, pk=stage_id)
+    diet_plans = DietPlan.objects.filter(stage=stage)
+    workout_plans = WorkoutPlan.objects.filter(stage=stage)
+    return render(request, 'stage_detail.html', {
+        'stage': stage,
+        'diet_plans': diet_plans,
+        'workout_plans': workout_plans
+    })
