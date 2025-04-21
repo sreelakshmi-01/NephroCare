@@ -30,41 +30,46 @@
     <div class="tab-content mt-4" id="dietWorkoutTabsContent">
         <!-- Diet Tab -->
         <div class="tab-pane fade show active" id="diet" role="tabpanel">
-            <div class="row">
-                {% for diet in diet_plans %}
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="{{ diet.image.url }}" class="card-img-top" alt="{{ diet.title }}">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">{{ diet.title }}</h5>
-                            <p class="card-text">{{ diet.short_description }}</p>
-                            <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#dietModal{{ diet.id }}">View Details</button>
-                        </div>
-                    </div>
+    <div class="row">
+        {% for diet in diet_plans %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ diet.image.url }}" class="card-img-top" alt="{{ diet.title }}">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ diet.title }}</h5>
+                    <p class="card-text">{{ diet.short_description }}</p>
+                    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#dietModal{{ diet.id }}">
+                        View Details
+                    </button>
                 </div>
-
-                <!-- Diet Modal -->
-                <div class="modal fade" id="dietModal{{ diet.id }}" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content p-3">
-                            <div class="modal-header">
-                                <h5 class="modal-title">{{ diet.title }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>{{ diet.detailed_instruction|safe }}</p>
-                                {% if diet.video_url %}
-                                <div class="ratio ratio-16x9">
-                                    <iframe src="{{ diet.video_url }}" allowfullscreen></iframe>
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
+
+        <!-- Diet Modal -->
+        <div class="modal fade" id="dietModal{{ diet.id }}" tabindex="-1" aria-labelledby="dietModalLabel{{ diet.id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content p-3">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dietModalLabel{{ diet.id }}">{{ diet.title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            {{ diet.detailed_instructions|linebreaks }}
+                        </div>
+                        {% if diet.video_url %}
+                        <div class="ratio ratio-16x9">
+                            <iframe src="{{ diet.video_url }}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 
         <!-- Workout Tab -->
         <div class="tab-pane fade" id="workout" role="tabpanel">
