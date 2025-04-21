@@ -33,7 +33,6 @@ urlpatterns = [
     path('toggle-status/', views.toggle_doctor_status, name='toggle_doctor_status'),
     path('booking/<int:doctor_id>/',views.book, name='book'),
     path('profile/', views.profile_view, name='profile'),
-    path('stage1-2/', views.stage_diet, name='stage_diet'),
     path('admin-diet/add-stage/', views.add_stage, name='add_stage'),
     path('admin-diet/add-diet/', views.add_diet_plan, name='add_diet_plan'),
     path('admin-diet/add-workout/', views.add_workout_plan, name='add_workout_plan'),

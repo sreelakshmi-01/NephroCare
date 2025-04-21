@@ -151,6 +151,7 @@ class DietPlan(models.Model):
 
 class WorkoutPlan(models.Model):
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE, related_name='workout_plans')
+    title = models.CharField(max_length=100, null=True)
     category = models.CharField(max_length=100)
     duration = models.CharField(max_length=50)  # e.g., "15 minutes"
     image = models.ImageField(upload_to='workout_images/')

@@ -404,8 +404,7 @@ def profile_view(request):
         "appointments": appointments,
     })
 
-def stage_diet(request):
-    return render(request, 'stage_diet.html')
+
 
 def add_stage(request):
     if request.method == 'POST':

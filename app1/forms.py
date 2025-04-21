@@ -50,4 +50,4 @@ class DietPlanForm(forms.ModelForm):
 class WorkoutPlanForm(forms.ModelForm):
     class Meta:
         model = WorkoutPlan
-        fields = ['stage', 'category', 'duration', 'image', 'video_url']
+        fields = ['stage', 'title', 'category', 'duration', 'image', 'video_url']
