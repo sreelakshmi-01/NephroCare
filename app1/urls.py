@@ -35,7 +35,6 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('admin-diet/add-stage/', views.add_stage, name='add_stage'),
     path('admin-diet/add-diet/', views.add_diet_plan, name='add_diet_plan'),
-    path('admin-diet/add-workout/', views.add_workout_plan, name='add_workout_plan'),
     path('diet/<int:stage_id>/', views.stage_detail, name='stage_detail'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
