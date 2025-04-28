@@ -40,7 +40,7 @@
                 {% for diet in diet_plans %}
                 <div class="col-md-2 mb-4">
                     <div class="card h-100">
-                        <img  src="{{ diet.image.url }}" class="card-img-top" alt="{{ diet.title }}" style="object-fit: cover; height: 200px; width: 100%;">
+                        <img src="{{ diet.image.url }}" class="card-img-top" alt="{{ diet.title }}" style="object-fit: cover; height: 200px; width: 100%;">
                         <div class="card-body text-center d-flex flex-column justify-content-between" style="min-height: 300px;">
                             <h5 class="card-title">{{ diet.title }}</h5>
                             <p class="card-text">{{ diet.short_description }}</p>
