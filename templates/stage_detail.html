@@ -7,6 +7,9 @@
 {% block content %}
 <!-- Hero  Section -->
 <div class="hero position-relative">
+    <img src="{{ stage.image.url }}" alt="{{ stage.name }}" class="w-100" style="height: 400px; object-fit: cover; filter: brightness(90%);">
+
+    <!-- Left side text -->
     <div class="position-absolute top-50 start-0 translate-middle-y text-white ps-5">
         <h1 style="font-family: 'Montserrat', sans-serif; font-size: 64px; color:black; font-weight: 700; width:50%;">
             {{ stage.title }}
