@@ -1,0 +1,70 @@
+{% extends 'adminbase.html' %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="mb-4">All Appointments</h2>
+
+    <form method="get" class="row g-3 mb-4">
+        <div class="col-md-4">
+            <select name="hospital" class="form-select">
+                <option value="">All Hospitals</option>
+                {% for hospital in hospitals %}
+                    <option value="{{ hospital.id }}" {% if hospital.id|stringformat:"s" == selected_hospital %}selected{% endif %}>
+                        {{ hospital.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <select name="doctor" class="form-select">
+                <option value="">All Doctors</option>
+                {% for doctor in doctors %}
+                    <option value="{{ doctor.id }}" {% if doctor.id|stringformat:"s" == selected_doctor %}selected{% endif %}>
+                        {{ doctor.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <input type="date" name="date" value="{{ selected_date }}" class="form-control">
+        </div>
+
+        <div class="col-md-12 text-end">
+            <button type="submit" class="btn btn-dark">Filter</button>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Hospital</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Timing</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appt in appointments %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ appt.name }}</td>
+                <td>{{ appt.mobile }}</td>
+                <td>{{ appt.hospital.name }}</td>
+                <td>{{ appt.doctor.name }}</td>
+                <td>{{ appt.date }}</td>
+                <td>{{ appt.timing }}</td>
+                <td>{{ appt.created_at|date:"Y-m-d H:i" }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="8" class="text-center">No appointments found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

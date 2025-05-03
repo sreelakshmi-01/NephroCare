@@ -403,6 +403,35 @@ def profile_view(request):
         "profile": profile,
         "appointments": appointments,
     })
+from django.db.models import Q
+
+def admin_appointments(request):
+    hospital_id = request.GET.get('hospital')
+    doctor_id = request.GET.get('doctor')
+    date = request.GET.get('date')
+
+    appointments = Appointment.objects.all()
+
+    if hospital_id:
+        appointments = appointments.filter(hospital__id=hospital_id)
+    if doctor_id:
+        appointments = appointments.filter(doctor__id=doctor_id)
+    if date:
+        appointments = appointments.filter(date=date)
+
+    hospitals = Hospital.objects.all()
+    doctors = Doctor.objects.all()
+
+    context = {
+        'appointments': appointments,
+        'hospitals': hospitals,
+        'doctors': doctors,
+        'selected_hospital': hospital_id,
+        'selected_doctor': doctor_id,
+        'selected_date': date,
+    }
+
+    return render(request, 'admin/appointments.html', context)
 
 def add_stage(request):
     if request.method == 'POST':

@@ -37,5 +37,6 @@ urlpatterns = [
     path('admin-diet/add-diet/', views.add_diet_plan, name='add_diet_plan'),
     path('admin-diet/add-workout/', views.add_workout_plan, name='add_workout_plan'),
     path('diet/<int:stage_id>/', views.stage_detail, name='stage_detail'),
+    path('admin-appointments/', views.admin_appointments, name='admin_appointments'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
