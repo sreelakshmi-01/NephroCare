@@ -431,7 +431,7 @@ def admin_appointments(request):
         'selected_date': date,
     }
 
-    return render(request, 'admin/appointments.html', context)
+    return render(request, 'admin_appointments.html', context)
 
 def add_stage(request):
     if request.method == 'POST':
