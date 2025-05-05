@@ -521,6 +521,7 @@ def admin_doctor_edit(request, doctor_id):
         form = DoctorForm(instance=doctor)
     return render(request, 'admin_doctor_edit.html', {'form': form})
 
+
 def admin_doctor_delete(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     doctor.delete()

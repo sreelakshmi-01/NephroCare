@@ -37,6 +37,7 @@ class DoctorForm(forms.ModelForm):
             'password': forms.PasswordInput(),
         }
 
+
 class StageForm(forms.ModelForm):
     class Meta:
         model = Stage
