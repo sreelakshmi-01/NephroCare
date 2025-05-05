@@ -32,7 +32,7 @@
                     <p class="card-text mb-1"><strong>Hospital:</strong> {{ doctor.hospital.hosp_name }}</p>
                     <p class="card-text mb-3">
                         <strong>Status:</strong>
-                        {% if doctor.available %}
+                        {% if doctor.status == 'Yes' %}
                             <span class="badge bg-success">Available</span>
                         {% else %}
                             <span class="badge bg-danger">Not Available</span>

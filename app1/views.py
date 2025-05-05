@@ -488,9 +488,6 @@ def admin_doctors(request):
     }
     return render(request, 'admin_doctors.html', context)
 
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Doctor, Hospital
-from .forms import DoctorForm  # You need to create this form
 
 def admin_doctors(request):
     hospital_id = request.GET.get('hospital')
