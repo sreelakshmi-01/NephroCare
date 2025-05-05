@@ -38,5 +38,6 @@ urlpatterns = [
     path('admin-diet/add-workout/', views.add_workout_plan, name='add_workout_plan'),
     path('diet/<int:stage_id>/', views.stage_detail, name='stage_detail'),
     path('admin-appointments/', views.admin_appointments, name='admin_appointments'),
+    path('admin-doctors/', views.admin_doctors, name='admin_doctors'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
