@@ -1,0 +1,55 @@
+{% extends 'adminbase.html' %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="mb-4">Doctor Management</h2>
+
+    <!-- Filter Form -->
+    <form method="get" class="row g-3 mb-4">
+        <div class="col-md-6">
+            <select name="hospital" class="form-select">
+                <option value="">All Hospitals</option>
+                {% for hospital in hospitals %}
+                    <option value="{{ hospital.id }}" {% if hospital.id|stringformat:"s" == selected_hospital %}selected{% endif %}>
+                        {{ hospital.hosp_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-6 text-end">
+            <button type="submit" class="btn btn-dark">Filter</button>
+        </div>
+    </form>
+
+    <!-- Doctor Cards -->
+    <div class="row">
+        {% for doctor in doctors %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ doctor.name }}</h5>
+                    <p class="card-text mb-1"><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+                    <p class="card-text mb-1"><strong>Hospital:</strong> {{ doctor.hospital.hosp_name }}</p>
+                    <p class="card-text mb-3">
+                        <strong>Status:</strong>
+                        {% if doctor.available %}
+                            <span class="badge bg-success">Available</span>
+                        {% else %}
+                            <span class="badge bg-danger">Not Available</span>
+                        {% endif %}
+                    </p>
+                    <!-- Optional action buttons -->
+                    <a href="#" class="btn btn-outline-primary btn-sm">View</a>
+                    <a href="#" class="btn btn-outline-secondary btn-sm">Edit</a>
+                    <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center">No doctors found.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

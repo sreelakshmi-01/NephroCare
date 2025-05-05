@@ -472,3 +472,4 @@ def stage_detail(request, stage_id):
         'diet_plans': diet_plans,
         'workout_plans': workout_plans
     })
+
