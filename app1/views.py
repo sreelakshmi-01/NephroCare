@@ -473,3 +473,17 @@ def stage_detail(request, stage_id):
         'workout_plans': workout_plans
     })
 
+def admin_doctors(request):
+    hospital_id = request.GET.get('hospital')
+    doctors = Doctor.objects.all()
+    hospitals = Hospital.objects.all()
+
+    if hospital_id:
+        doctors = doctors.filter(hospital_id=hospital_id)
+
+    context = {
+        'doctors': doctors,
+        'hospitals': hospitals,
+        'selected_hospital': hospital_id,
+    }
+    return render(request, 'admin_doctors.html', context)
