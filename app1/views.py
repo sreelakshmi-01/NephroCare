@@ -487,3 +487,41 @@ def admin_doctors(request):
         'selected_hospital': hospital_id,
     }
     return render(request, 'admin_doctors.html', context)
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Doctor, Hospital
+from .forms import DoctorForm  # You need to create this form
+
+def admin_doctors(request):
+    hospital_id = request.GET.get('hospital')
+    doctors = Doctor.objects.all()
+    hospitals = Hospital.objects.all()
+
+    if hospital_id:
+        doctors = doctors.filter(hospital_id=hospital_id)
+
+    return render(request, 'admin_doctors.html', {
+        'doctors': doctors,
+        'hospitals': hospitals,
+        'selected_hospital': hospital_id
+    })
+
+def admin_doctor_view(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    return render(request, 'admin_doctor_view.html', {'doctor': doctor})
+
+def admin_doctor_edit(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    if request.method == 'POST':
+        form = DoctorForm(request.POST, instance=doctor)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_doctors')
+    else:
+        form = DoctorForm(instance=doctor)
+    return render(request, 'admin_doctor_edit.html', {'form': form})
+
+def admin_doctor_delete(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    doctor.delete()
+    return redirect('admin_doctors')
