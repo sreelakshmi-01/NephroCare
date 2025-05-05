@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin-add-hospitals/', views.add_hospital, name = 'add_hospitals'),
     path('hospitals/', views.hospital_list, name='hospital_list'),
     path('doctor-dashboard/', views.doctor_dashboard, name = 'doctor_dashboard'),
+    path('doctor/mark-completed/<int:appt_id>/', views.mark_completed, name='mark_completed'),
     path('doctors/<int:hosp_id>/', views.doctor_list, name = 'doctors_list'),
     path('toggle-status/', views.toggle_doctor_status, name='toggle_doctor_status'),
     path('booking/<int:doctor_id>/',views.book, name='book'),

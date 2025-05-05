@@ -114,6 +114,7 @@ class Appointment(models.Model):
 
     date = models.DateField()
     timing = models.CharField(max_length=20, choices=TIMING_CHOICES)
+    status = models.CharField(max_length=20, default="Pending")
 
     created_at = models.DateTimeField(auto_now_add=True)
 

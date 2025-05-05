@@ -523,3 +523,18 @@ def admin_doctor_delete(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     doctor.delete()
     return redirect('admin_doctors')
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Appointment
+
+@csrf_exempt
+def mark_completed(request, appt_id):
+    if request.method == "POST":
+        try:
+            appt = Appointment.objects.get(id=appt_id)
+            appt.status = "Completed"
+            appt.save()
+            return JsonResponse({"success": True})
+        except Appointment.DoesNotExist:
+            return JsonResponse({"success": False})
