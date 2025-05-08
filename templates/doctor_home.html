@@ -190,43 +190,36 @@
     <div class="main-content">
         <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
         <h2>Welcome, Dr. {{ doctor.name }}</h2>
+        <h3 style="font-size: 24px; margin-bottom: 20px; margin-top: 20px;">Appointments</h3>
+        {% if appointments %}
+            <table style="width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                <thead style="background: #83BAFF; color: white;">
+                    <tr>
+                        <th style="padding: 12px;">Patient</th>
+                        <th style="padding: 12px;">Date</th>
+                        <th style="padding: 12px;">Timing</th>
+                        <th style="padding: 12px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr style="border-top: 1px solid #ddd;">
+                        <td style="pad appointment.name }}</td>
+                        <td style="padding: 12px;">{{ appointment.date }}</td>
+                        <td style="padding: 12px;">{{ appointment.timing }}</td>
+                        <td style="padding: 12px;">
+                            <button style="padding: 6px 12px; background: #2ECC71; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                Mark as Completed
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p style="color: #999; font-style: italic;">No appointments found.</p>
+        {% endif %}
 
-        <h3 style="margin-top: 30px;">Your Appointments</h3>
-
-        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
-            <thead>
-                <tr style="background-color: #ddd;">
-                    <th style="padding: 10px;">Patient Name</th>
-                    <th style="padding: 10px;">Date</th>
-                    <th style="padding: 10px;">Timing</th>
-                    <th style="padding: 10px;">Status</th>
-                    <th style="padding: 10px;">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for appt in appointments %}
-                <tr style="border-bottom: 1px solid #ccc;">
-                    <td style="padding: 10px;">{{ appt.name }}</td>
-                    <td style="padding: 10px;">{{ appt.date }}</td>
-                    <td style="padding: 10px;">{{ appt.timing }}</td>
-                    <td style="padding: 10px;" id="status-{{ appt.id }}">{{ appt.status }}</td>
-                    <td style="padding: 10px;">
-                        {% if appt.status != "Completed" %}
-                        <button onclick="markCompleted({{ appt.id }})" style="padding: 5px 10px; background: #2ECC71; color: white; border: none; border-radius: 5px;">Mark as Completed</button>
-                        {% else %}
-                        <span style="color: gray;">Done</span>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" style="padding: 15px; text-align: center;">No Appointments Found</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-    </div>
 
     <script>
 document.getElementById("statusToggle").addEventListener("change", function () {

@@ -245,8 +245,13 @@ def doctor_dashboard(request):
         messages.error(request, "Doctor profile not found!")
         return redirect('login')
 
-    return render(request, 'doctor_home.html', {'doctor': doctor})
+    # ✅ Fetch appointments for this doctor
+    appointments = Appointment.objects.filter(doctor=doctor).order_by('-date')
 
+    return render(request, 'doctor_home.html', {
+        'doctor': doctor,
+        'appointments': appointments
+    })
 from django.http import JsonResponse
 
 def toggle_doctor_status(request):
