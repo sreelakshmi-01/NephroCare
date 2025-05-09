@@ -52,3 +52,12 @@ class WorkoutPlanForm(forms.ModelForm):
     class Meta:
         model = WorkoutPlan
         fields = ['stage', 'title', 'category', 'duration', 'image', 'video_url']
+
+class MedicineForm(forms.ModelForm):
+    class Meta:
+        model = Medicine
+        fields = '__all__'
+        widgets = {
+            'used_for': forms.Textarea(attrs={'rows': 3}),
+            'prescription_required': forms.CheckboxInput(),
+        }

@@ -160,3 +160,50 @@ class WorkoutPlan(models.Model):
 
     def __str__(self):
         return f"{self.category} ({self.stage.title})"
+
+from django.db import models
+
+class Medicine(models.Model):
+    CONDITION_CHOICES = [
+        ('new', 'New'),
+        ('used', 'Used'),
+    ]
+
+    ITEM_FORM_CHOICES = [
+        ('capsule', 'Capsule'),
+        ('tablet', 'Tablet'),
+        ('syrup', 'Syrup'),
+        ('injection', 'Injection'),
+    ]
+
+    DOSAGE_FORM_CHOICES = [
+        ('tablet', 'Tablet'),
+        ('capsule', 'Capsule'),
+        ('liquid', 'Liquid'),
+        ('other', 'Other'),
+    ]
+
+    FOOD_PREFERENCE_CHOICES = [
+        ('veg', 'Vegetarian'),
+        ('non_veg', 'Non-Vegetarian'),
+        ('not_specified', 'Not specified'),
+    ]
+
+    name = models.CharField(max_length=100)
+    condition = models.CharField(max_length=10, choices=CONDITION_CHOICES, default='new')
+    product_id = models.CharField(max_length=20, unique=True)
+
+    brand = models.CharField(max_length=100)
+    unit_count = models.PositiveIntegerField()
+    item_form = models.CharField(max_length=20, choices=ITEM_FORM_CHOICES)
+    used_for = models.TextField()
+    dosage_form = models.CharField(max_length=20, choices=DOSAGE_FORM_CHOICES)
+    prescription_required = models.BooleanField(default=True)
+    shelf_life = models.CharField(max_length=20)  # e.g. "2 Years"
+    food_preference = models.CharField(max_length=20, choices=FOOD_PREFERENCE_CHOICES, default='not_specified')
+
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='medicine_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name

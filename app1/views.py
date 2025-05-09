@@ -550,3 +550,13 @@ def medicine_store(request):
 def medicine_detail(request, id):
     # For now, just render static detail
     return render(request, 'medicine_details.html')
+
+def add_medicine(request):
+    if request.method == 'POST':
+        form = MedicineForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('add_medicine')
+    else:
+        form = MedicineForm()
+    return render(request, 'add_medicine.html', {'form': form})
