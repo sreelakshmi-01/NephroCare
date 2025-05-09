@@ -549,4 +549,4 @@ def medicine_store(request):
 
 def medicine_detail(request, id):
     # For now, just render static detail
-    return render(request, 'medicine_detail.html')
+    return render(request, 'medicine_details.html')
