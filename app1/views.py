@@ -546,3 +546,7 @@ def mark_completed(request, appt_id):
 
 def medicine_store(request):
     return render(request, 'medicine.html')
+
+def medicine_detail(request, id):
+    # For now, just render static detail
+    return render(request, 'medicine_detail.html')
