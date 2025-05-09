@@ -7,7 +7,7 @@
         <p class="text-muted">Easy & Trusted Medicine Shopping for Your Healthy Support</p>
     </div>
 
-    <!-- Search and Filter -->
+    <!-- Search and Filter (not yet functional) -->
     <div class="row justify-content-between my-4">
         <div class="col-md-6">
             <input type="text" class="form-control" placeholder="Search medicine...">
@@ -24,18 +24,24 @@
 
     <!-- Medicine Cards -->
     <div class="row">
-        {% for i in "123456789012" %}
+        {% for med in medicines %}
         <div class="col-md-3 mb-4">
             <div class="card h-100 shadow-sm">
+                {% if med.image %}
+                <img src="{{ med.image.url }}" class="card-img-top" alt="Medicine Image">
+                {% else %}
                 <img src="{% static 'images/sample_medicine.jpg' %}" class="card-img-top" alt="Medicine Image">
+                {% endif %}
                 <div class="card-body text-center">
-                    <h5 class="card-title">Vitamin C Tablet</h5>
-                    <p class="card-text text-muted mb-1">500mg</p>
-                    <p class="card-text fw-bold">₹50</p>
-                    <a href="{% url 'medicine_details' 1 %}" class="btn btn-primary btn-sm">View More</a>
+                    <h5 class="card-title">{{ med.name }}</h5>
+                    <p class="card-text text-muted mb-1">{{ med.unit_count }} units</p>
+                    <p class="card-text fw-bold">₹{{ med.price }}</p>
+                    <a href="{% url 'medicine_details' med.id %}" class="btn btn-primary btn-sm">View More</a>
                 </div>
             </div>
         </div>
+        {% empty %}
+        <p class="text-center">No medicines found.</p>
         {% endfor %}
     </div>
 </div>

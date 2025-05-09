@@ -545,7 +545,8 @@ def mark_completed(request, appt_id):
             return JsonResponse({"success": False})
 
 def medicine_store(request):
-    return render(request, 'medicine.html')
+    medicines = Medicine.objects.all()
+    return render(request, 'medicine.html', {'medicines': medicines})
 
 def medicine_detail(request, id):
     # For now, just render static detail
