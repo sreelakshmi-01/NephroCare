@@ -1,48 +1,55 @@
 {% extends 'userbase.html' %}
 {% load static %}
 {% block content %}
+
 <div class="container mt-5">
     <div class="text-center">
         <h2 class="fw-bold mb-2">Our Products</h2>
         <p class="text-muted">Easy & Trusted Medicine Shopping for Your Healthy Support</p>
     </div>
 
-    <!-- Search and Filter (not yet functional) -->
-    <div class="row justify-content-between my-4">
-        <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Search medicine...">
+    <!-- Search and Filter -->
+    <form method="GET" class="row justify-content-between my-4">
+        <div class="col-md-4 mb-2">
+            <input type="text" name="search" class="form-control" placeholder="Search medicine..." value="{{ request.GET.search }}">
         </div>
-        <div class="col-md-3">
-            <select class="form-select">
-                <option value="">All Categories</option>
-                <option value="vitamin">Vitamins</option>
-                <option value="bp">BP Medicines</option>
-                <option value="dialysis">Dialysis Support</option>
+        <div class="col-md-3 mb-2">
+            <select name="dosage" class="form-select">
+                <option value="">All Dosage Forms</option>
+                <option value="Tablet" {% if request.GET.dosage == "Tablet" %}selected{% endif %}>Tablet</option>
+                <option value="Capsule" {% if request.GET.dosage == "Capsule" %}selected{% endif %}>Capsule</option>
+                <option value="Liquid" {% if request.GET.dosage == "Liquid" %}selected{% endif %}>Liquid</option>
             </select>
         </div>
-    </div>
+        <div class="col-md-2 mb-2">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+    </form>
 
     <!-- Medicine Cards -->
     <div class="row">
-        {% for med in medicines %}
+        {% for medicine in medicines %}
         <div class="col-md-3 mb-4">
             <div class="card h-100 shadow-sm">
-                {% if med.image %}
-                <img src="{{ med.image.url }}" class="card-img-top" alt="Medicine Image">
+                {% if medicine.image %}
+                    <img src="{{ medicine.image.url }}" class="card-img-top" style="height: 180px; object-fit: contain;" alt="{{ medicine.name }}">
                 {% else %}
-                <img src="{% static 'images/sample_medicine.jpg' %}" class="card-img-top" alt="Medicine Image">
+                    <img src="{% static 'images/sample_medicine.jpg' %}" class="card-img-top" style="height: 180px; object-fit: contain;" alt="Default Image">
                 {% endif %}
                 <div class="card-body text-center">
-                    <h5 class="card-title">{{ med.name }}</h5>
-                    <p class="card-text text-muted mb-1">{{ med.unit_count }} units</p>
-                    <p class="card-text fw-bold">₹{{ med.price }}</p>
-                    <a href="{% url 'medicine_details' med.id %}" class="btn btn-primary btn-sm">View More</a>
+                    <h5 class="card-title">{{ medicine.name }}</h5>
+                    <p class="text-muted mb-1">{{ medicine.unit_count }} units</p>
+                    <p class="fw-bold">₹{{ medicine.price }}</p>
+                    <a href="{% url 'medicine_details' medicine.id %}" class="btn btn-sm btn-outline-primary">View More</a>
                 </div>
             </div>
         </div>
         {% empty %}
-        <p class="text-center">No medicines found.</p>
+        <div class="col-12 text-center text-danger">
+            <p>No medicines found matching your criteria.</p>
+        </div>
         {% endfor %}
     </div>
 </div>
+
 {% endblock %}

@@ -544,9 +544,24 @@ def mark_completed(request, appt_id):
         except Appointment.DoesNotExist:
             return JsonResponse({"success": False})
 
+from django.shortcuts import render
+from .models import Medicine
+
 def medicine_store(request):
     medicines = Medicine.objects.all()
+
+    search_query = request.GET.get('search', '')
+    category = request.GET.get('category', '')
+    dosage_form = request.GET.get('dosage', '')
+
+    if search_query:
+        medicines = medicines.filter(name__icontains=search_query)
+
+    if dosage_form:
+        medicines = medicines.filter(dosage_form__iexact=dosage_form)
+
     return render(request, 'medicine.html', {'medicines': medicines})
+
 
 def medicine_detail(request, id):
     # For now, just render static detail
