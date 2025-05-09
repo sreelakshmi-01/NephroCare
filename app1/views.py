@@ -545,4 +545,4 @@ def mark_completed(request, appt_id):
             return JsonResponse({"success": False})
 
 def medicine_store(request):
-    return render(request, 'medicine_store.html')
+    return render(request, 'medicine.html')
