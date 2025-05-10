@@ -564,8 +564,13 @@ def medicine_store(request):
 
 
 def medicine_detail(request, id):
-    # For now, just render static detail
-    return render(request, 'medicine_details.html')
+    medicine = get_object_or_404(Medicine, id=id)
+    other_medicines = Medicine.objects.exclude(id=id)[:4]  # display 4 other medicines
+    return render(request, 'medicine_details.html', {
+        'medicine': medicine,
+        'other_medicines': other_medicines
+    })
+
 
 def add_medicine(request):
     if request.method == 'POST':

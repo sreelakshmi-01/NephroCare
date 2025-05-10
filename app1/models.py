@@ -165,28 +165,28 @@ from django.db import models
 
 class Medicine(models.Model):
     CONDITION_CHOICES = [
-        ('new', 'New'),
-        ('used', 'Used'),
+        ('New', 'New'),
+        ('Used', 'Used'),
     ]
 
     ITEM_FORM_CHOICES = [
-        ('capsule', 'Capsule'),
-        ('tablet', 'Tablet'),
-        ('syrup', 'Syrup'),
-        ('injection', 'Injection'),
+        ('Capsule', 'Capsule'),
+        ('Tablet', 'Tablet'),
+        ('Syrup', 'Syrup'),
+        ('Injection', 'Injection'),
     ]
 
     DOSAGE_FORM_CHOICES = [
-        ('tablet', 'Tablet'),
-        ('capsule', 'Capsule'),
-        ('liquid', 'Liquid'),
-        ('other', 'Other'),
+        ('Tablet', 'Tablet'),
+        ('Capsule', 'Capsule'),
+        ('Liquid', 'Liquid'),
+        ('Other', 'Other'),
     ]
 
     FOOD_PREFERENCE_CHOICES = [
-        ('veg', 'Vegetarian'),
-        ('non_veg', 'Non-Vegetarian'),
-        ('not_specified', 'Not specified'),
+        ('Veg', 'Vegetarian'),
+        ('Non_veg', 'Non-Vegetarian'),
+        ('Not_specified', 'Not specified'),
     ]
 
     name = models.CharField(max_length=100)
@@ -199,7 +199,7 @@ class Medicine(models.Model):
     used_for = models.TextField()
     dosage_form = models.CharField(max_length=20, choices=DOSAGE_FORM_CHOICES)
     prescription_required = models.BooleanField(default=True)
-    shelf_life = models.CharField(max_length=20)  # e.g. "2 Years"
+    shelf_life = models.CharField(max_length=20)
     food_preference = models.CharField(max_length=20, choices=FOOD_PREFERENCE_CHOICES, default='not_specified')
 
     price = models.DecimalField(max_digits=10, decimal_places=2)
