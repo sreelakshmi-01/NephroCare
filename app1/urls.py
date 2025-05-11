@@ -25,7 +25,6 @@ urlpatterns = [
     path('gfr/', views.gfr, name='gfr'),
     path('diet/', views.diet, name='diet'),
     path('admin-add-hospitals/edit/<int:hosp_id>/', views.edit_hosp, name = 'edit_hospitals'),
-    path('admin-add-hospitals/delete/<int:hosp_id>/', views.delete_hosp, name = 'dlt_hospitals'),
     path('admin-add-hospitals/', views.add_hospital, name = 'add_hospitals'),
     path('hospitals/', views.hospital_list, name='hospital_list'),
     path('doctor-dashboard/', views.doctor_dashboard, name = 'doctor_dashboard'),
