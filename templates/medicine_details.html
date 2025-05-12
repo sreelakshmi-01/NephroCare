@@ -2,8 +2,42 @@
 {% load static %}
 {% block content %}
 
+<style>
+    .quantity-selector {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quantity-btn {
+        padding: 0.3rem 0.7rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        background-color: #f8f9fa;
+        cursor: pointer;
+    }
+
+    .quantity-input {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .divider-line {
+        width: 2px;
+        background-color: #8A8A8A;
+        height: 100%;
+        margin: auto;
+    }
+
+    .price-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
 <div class="container mt-5">
-    <!-- Main Product Section -->
     <div class="row align-items-center">
         <!-- Product Image (Left) -->
         <div class="col-md-3">
@@ -14,42 +48,70 @@
             {% endif %}
         </div>
 
+        <!-- Vertical Line Divider -->
+        <div class="col-md-1 d-none d-md-flex justify-content-center">
+            <div class="divider-line"></div>
+        </div>
+
         <!-- Product Details (Center) -->
-        <div class="col-md-5">
+        <div class="col-md-4">
             <h3 class="fw-bold text-primary" style="font-size: 2.2rem;">{{ medicine.name }}</h3>
-            <h6 class="text-muted" style="font-size: 1rem;">Condition: <span class="text-dark">{{ medicine.condition }}</span></h6>
-            <h6 class="text-muted" style="font-size: 1rem;">Product ID: <span class="text-dark">{{ medicine.product_id }}</span></h6>
+            <h6 class="text-muted">Condition: <span class="text-dark">{{ medicine.condition }}</span></h6>
+            <h6 class="text-muted">Product ID: <span class="text-dark">{{ medicine.product_id }}</span></h6>
 
             <h4 class="mt-4 mb-3" style="font-size: 1.5rem; font-weight: 600;">Details</h4>
-
             <div class="mb-2">
-                <p style="font-size: 1rem; line-height: 1;"><strong class="text-dark">Brand:</strong> <span>{{ medicine.brand }}</span></p>
-                <p style="font-size: 1rem; line-height: 1;"><strong class="text-dark">Unit Count:</strong> <span>{{ medicine.unit_count }}</span></p>
-                <p style="font-size: 1rem; line-height: 1;"><strong class="text-dark">Item Form:</strong> <span>{{ medicine.item_form }}</span></p>
-                <p style="font-size: 1rem; line-height: 1;"><strong class="text-dark">Uses:</strong> <span>{{ medicine.used_for }}</span></p>
-                <p style="font-size: 1rem; line-height: 1;"><strong class="text-dark">Prescription Required:</strong> <span>{{ medicine.prescription_required }}</span></p>
-                <p style="font-size: 1rem; line-height: 1;"><strong class="text-dark">Shelf Life:</strong> <span>{{ medicine.shelf_life }}</span></p>
-                <p style="font-size: 1rem; line-height: 1;"><strong class="text-dark">Food Preference:</strong> <span>{{ medicine.food_preference }}</span></p>
+                <p><strong class="text-dark">Brand:</strong> {{ medicine.brand }}</p>
+                <p><strong class="text-dark">Unit Count:</strong> {{ medicine.unit_count }}</p>
+                <p><strong class="text-dark">Item Form:</strong> {{ medicine.item_form }}</p>
+                <p><strong class="text-dark">Uses:</strong> {{ medicine.used_for }}</p>
+                <p><strong class="text-dark">Prescription Required:</strong> {{ medicine.prescription_required }}</p>
+                <p><strong class="text-dark">Shelf Life:</strong> {{ medicine.shelf_life }}</p>
+                <p><strong class="text-dark">Food Preference:</strong> {{ medicine.food_preference }}</p>
             </div>
         </div>
 
         <!-- Price Box (Right) -->
-        <div class="col-md-4">
-            <div class="card p-3 shadow-sm">
-                <h4>₹{{ medicine.price }}</h4>
-                <p class="text-muted small mb-2">{{ medicine.name }}<br>Pack of {{ medicine.unit_count }} {{ medicine.dosage_form }}s</p>
-                <!-- Add to Cart Button -->
-                {% if request.session.user_id %}
-                  <form method="POST" action="{% url 'add_to_cart' id=medicine.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary mt-3">Add to Cart</button>
-                  </form>
-                {% else %}
-                  <p class="text-danger mt-3">Please <a href="{% url 'login' %}">log in</a> to add to cart.</p>
-                {% endif %}
+<div class="col-md-4">
+    <div class="card p-4 shadow" style="border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.15);">
+        <h4 class="fw-bold text-success">₹{{ medicine.price }}</h4>
+        <p class="text-muted small mb-3">{{ medicine.name }}<br>Pack of {{ medicine.unit_count }} {{ medicine.dosage_form }}s</p>
 
+        <!-- Quantity Selector -->
+        <div class="d-flex align-items-center mb-3">
+            <label for="quantity" class="me-2 mb-0">Quantity:</label>
+            <div class="input-group" style="width: 120px;">
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeQty(-1)">−</button>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control text-center" readonly>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeQty(1)">+</button>
             </div>
         </div>
+
+        {% if request.session.user_id %}
+            {% if medicine.id in cart_items_ids %}
+                <!-- Already in cart -->
+                <a href="{% url 'view_cart' %}" class="btn btn-success w-100 mt-2">Go to Cart</a>
+            {% else %}
+                <!-- Add to Cart Form -->
+                <form method="POST" action="{% url 'add_to_cart' id=medicine.id %}" id="cartForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" id="cart_quantity">
+                    <button type="submit" class="btn btn-primary w-100 mt-2">Add to Cart</button>
+                </form>
+            {% endif %}
+
+            <!-- Place Order Form -->
+            <form method="POST" action="#" class="mt-2" id="orderForm">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" id="order_quantity">
+                <button type="submit" class="btn btn-warning w-100">Place Order</button>
+            </form>
+        {% else %}
+            <p class="text-danger mt-3">Please <a href="{% url 'login' %}">log in</a> to order.</p>
+        {% endif %}
+    </div>
+</div>
+
     </div>
 
     <!-- Other Products Section -->
@@ -76,5 +138,30 @@
         </div>
     </div>
 </div>
+
+<script>
+    function changeQty(delta) {
+        const input = document.getElementById('quantity');
+        let val = parseInt(input.value);
+        if (val + delta >= 1) input.value = val + delta;
+    }
+
+    // Ensure selected quantity is passed to forms
+    const cartForm = document.getElementById('cartForm');
+    const orderForm = document.getElementById('orderForm');
+
+    if (cartForm) {
+        cartForm.addEventListener('submit', function(e) {
+            document.getElementById('cart_quantity').value = document.getElementById('quantity').value;
+        });
+    }
+
+    if (orderForm) {
+        orderForm.addEventListener('submit', function(e) {
+            document.getElementById('order_quantity').value = document.getElementById('quantity').value;
+        });
+    }
+</script>
+
 
 {% endblock %}

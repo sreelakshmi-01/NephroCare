@@ -587,45 +587,52 @@ def add_medicine(request):
         form = MedicineForm()
     return render(request, 'add_medicine.html', {'form': form})
 
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib import messages
+from .models import Medicine, CartItem  # Update imports as needed
+
 def add_to_cart(request, id):
     if not request.session.get('user_id'):
         messages.error(request, "You need to log in to add items to your cart.")
-        return redirect('login')  # redirect to login if not logged in
+        return redirect('login')
 
     user_id = request.session.get('user_id')
     medicine = get_object_or_404(Medicine, id=id)
 
-    # Create or update cart item
+    # Get quantity from form, default to 1 if not valid
+    try:
+        quantity = int(request.POST.get('quantity', 1))
+        if quantity < 1:
+            quantity = 1
+    except ValueError:
+        quantity = 1
+
     cart_item, created = CartItem.objects.get_or_create(user_id=user_id, medicine=medicine)
     if not created:
-        cart_item.quantity += 1
-        cart_item.save()
+        # If already exists, update the quantity (e.g., add selected qty)
+        cart_item.quantity += quantity
+    else:
+        cart_item.quantity = quantity
+    cart_item.save()
 
     messages.success(request, f"{medicine.name} added to your cart.")
     return redirect('medicine_details', id=id)
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import CartItem
 
 @csrf_exempt
 def update_cart_item(request, item_id):
-    if request.method == "POST":
+    if request.method == 'POST':
         try:
-            # Get the cart item and the updated quantity
-            cart_item = CartItem.objects.get(id=item_id)
             data = json.loads(request.body)
             quantity = data.get('quantity')
-
-            # Update the quantity
-            if quantity and quantity > 0:
-                cart_item.quantity = quantity
-                cart_item.save()
-
+            item = CartItem.objects.get(id=item_id)
+            item.quantity = quantity
+            item.save()
             return JsonResponse({'success': True})
+        except Exception as e:
+            print("Error updating cart item:", e)
+            return JsonResponse({'success': False, 'error': str(e)})
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
 
-        except CartItem.DoesNotExist:
-            return JsonResponse({'success': False, 'error': 'Item not found'})
-    return JsonResponse({'success': False, 'error': 'Invalid method'})
 
 @csrf_exempt
 def delete_cart_item(request, item_id):
