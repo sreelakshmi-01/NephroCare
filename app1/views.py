@@ -381,6 +381,7 @@ def profile_view(request):
     profile, created = UserProfile.objects.get_or_create(user=user)
 
     appointments = Appointment.objects.filter(user=user).order_by('-date')
+    cart_items = CartItem.objects.filter(user_id=user_id)  # <-- Moved here
 
     if request.method == "POST":
         # Update User model
@@ -401,6 +402,7 @@ def profile_view(request):
 
         messages.success(request, "Profile updated successfully!")
 
+        # Optional: Refresh data after update
         appointments = Appointment.objects.filter(user=user).order_by('-date')
         cart_items = CartItem.objects.filter(user_id=user_id)
 
@@ -408,8 +410,9 @@ def profile_view(request):
         "user": user,
         "profile": profile,
         "appointments": appointments,
-        'cart_items': cart_items,
+        "cart_items": cart_items,
     })
+
 from django.db.models import Q
 
 def admin_appointments(request):

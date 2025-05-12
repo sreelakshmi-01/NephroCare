@@ -149,14 +149,22 @@
           <p class="text-muted">You have no appointments yet.</p>
         {% endif %}
       </div>
+
+      <!-- Shopping cart -->
       <div class="card shadow-sm mt-4 p-4">
         <h4 class="mb-3">Shopping Cart</h4>
         {% if cart_items %}
-          <ul class="list-group">
+          <ul class="list-group" id="cart-list">
             {% for item in cart_items %}
               <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ item.medicine.name }} (x{{ item.quantity }})
-                <span class="text-muted">Rs {{ item.medicine.price }}</span>
+                <div>
+                  <strong>{{ item.medicine.name }}</strong><br>
+                  Unit Price: Rs <span class="unit-price">{{ item.medicine.price }}</span><br>
+                  Quantity: <span class="quantity">{{ item.quantity }}</span>
+                </div>
+                <div class="text-end">
+                  Total: Rs <span class="total-price"></span>
+                </div>
               </li>
             {% endfor %}
           </ul>
@@ -164,6 +172,20 @@
           <p class="text-muted">Your cart is empty.</p>
         {% endif %}
       </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const items = document.querySelectorAll("#cart-list li");
+
+    items.forEach(item => {
+      const quantity = parseFloat(item.querySelector(".quantity").textContent);
+      const unitPrice = parseFloat(item.querySelector(".unit-price").textContent);
+      const total = quantity * unitPrice;
+      item.querySelector(".total-price").textContent = total.toFixed(2);
+    });
+  });
+</script>
+
 
     </div>
   </div>
