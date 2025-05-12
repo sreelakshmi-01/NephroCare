@@ -46,6 +46,8 @@ urlpatterns = [
     path('medicines/', views.medicine_store, name='medicine_store'),
     path('medicine/<int:id>/', views.medicine_detail, name='medicine_details'),
     path('admin-medicine/', views.add_medicine, name='add_medicine'),
+    path('add-to-cart/<str:product_id>/', views.add_to_cart, name='add_to_cart'),
+
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
