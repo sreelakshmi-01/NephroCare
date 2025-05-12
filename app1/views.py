@@ -581,3 +581,20 @@ def add_medicine(request):
     else:
         form = MedicineForm()
     return render(request, 'add_medicine.html', {'form': form})
+
+def add_to_cart(request, product_id):
+    if not request.session.get('user_id'):
+        messages.error(request, "You need to log in to add items to your cart.")
+        return redirect('login')  # redirect to login if not logged in
+
+    user_id = request.session.get('user_id')
+    medicine = Medicine.objects.get(product_id=product_id)
+
+    # Create or update cart item
+    cart_item, created = CartItem.objects.get_or_create(user_id=user_id, medicine=medicine)
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    messages.success(request, f"{medicine.name} added to your cart.")
+    return redirect('medicine_detail', product_id=product_id)
