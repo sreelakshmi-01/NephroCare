@@ -648,3 +648,53 @@ def delete_cart_item(request, item_id):
             return JsonResponse({'success': False, 'error': 'Item not found'})
     return JsonResponse({'success': False, 'error': 'Invalid method'})
 
+
+from django.shortcuts import render, redirect
+from .models import Order, CartItem, UserProfile
+
+
+def select_address(request):
+    if not request.session.get('user_id'):
+        return redirect('login')  # Redirect if not logged in
+
+    user = request.user
+    profile = UserProfile.objects.get(user=user)
+
+    # Get user's saved address
+    address = profile.address
+
+    return render(request, 'select_address.html', {'address': address})
+
+
+def confirm_order(request):
+    if not request.session.get('user_id'):
+        return redirect('login')
+
+    user = request.user
+    profile = UserProfile.objects.get(user=user)
+    address = profile.address
+
+    # Create the order
+    cart_items = CartItem.objects.filter(user=user)
+    order = Order.objects.create(
+        user_id=user.id,
+        address=address,
+        amount=total_amount,  # Calculate total cart value
+    )
+
+    # Create order items for each cart item
+    for item in cart_items:
+        OrderItem.objects.create(
+            order=order,
+            medicine=item.medicine,
+            quantity=item.quantity,
+        )
+
+    # Clear the cart after placing the order
+    cart_items.delete()
+
+    return redirect('order_success', order_id=order.id)
+
+
+def order_success(request):
+    return render(request, 'order_success.html')

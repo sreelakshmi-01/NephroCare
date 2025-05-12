@@ -1,0 +1,18 @@
+{% extends 'userbase.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h3>Select Delivery Address</h3>
+  <form method="POST" action="{% url 'confirm_order' %}">
+    {% csrf_token %}
+    {% for address in addresses %}
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="address" value="{{ address.id }}" id="address{{ forloop.counter }}">
+        <label class="form-check-label" for="address{{ forloop.counter }}">
+          {{ address.street }}, {{ address.city }} - {{ address.pincode }}
+        </label>
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-success mt-3">Confirm Order</button>
+  </form>
+</div>
+{% endblock %}

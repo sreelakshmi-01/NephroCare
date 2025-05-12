@@ -160,8 +160,12 @@
         </ul>
         <div class="text-end mt-3">
           <h5>Subtotal: Rs <span id="subtotal"></span></h5>
-          <button class="btn btn-success">Place Order</button>
+          <form method="POST" action="{% url 'select_address' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Place Order</button>
+          </form>
         </div>
+
         {% else %}
         <p class="text-muted">Your cart is empty.</p>
         {% endif %}
