@@ -150,41 +150,145 @@
         {% endif %}
       </div>
 
-      <!-- Shopping cart -->
-      <div class="card shadow-sm mt-4 p-4">
-        <h4 class="mb-3">Shopping Cart</h4>
-        {% if cart_items %}
-          <ul class="list-group" id="cart-list">
-            {% for item in cart_items %}
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <strong>{{ item.medicine.name }}</strong><br>
-                  Unit Price: Rs <span class="unit-price">{{ item.medicine.price }}</span><br>
-                  Quantity: <span class="quantity">{{ item.quantity }}</span>
-                </div>
-                <div class="text-end">
-                  Total: Rs <span class="total-price"></span>
-                </div>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="text-muted">Your cart is empty.</p>
-        {% endif %}
-      </div>
+     <!-- Shopping cart -->
+<div class="card shadow-sm mt-4 p-4">
+  <h4 class="mb-3">Shopping Cart</h4>
+  {% if cart_items %}
+    <ul class="list-group" id="cart-list">
+      {% for item in cart_items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center" id="cart-item-{{ item.id }}">
+          <div>
+            <strong>{{ item.medicine.name }}</strong><br>
+            Unit Price: Rs <span class="unit-price">{{ item.medicine.price }}</span><br>
+            Quantity:
+            <button class="btn btn-sm btn-outline-secondary adjust-quantity" data-id="{{ item.id }}" data-action="decrease">-</button>
+            <span class="quantity">{{ item.quantity }}</span>
+            <button class="btn btn-sm btn-outline-secondary adjust-quantity" data-id="{{ item.id }}" data-action="increase">+</button>
+          </div>
+          <div class="text-end">
+            Total: Rs <span class="total-price"></span><br>
+            <button class="btn btn-danger btn-sm delete-item" data-id="{{ item.id }}">Delete</button>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="text-end mt-3">
+      <h5>Subtotal: Rs <span id="subtotal"></span></h5>
+      <button class="btn btn-success">Place Order</button>
+    </div>
+  {% else %}
+    <p class="text-muted">Your cart is empty.</p>
+  {% endif %}
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const items = document.querySelectorAll("#cart-list li");
+    let subtotal = 0;
 
+    // Update prices for each item and calculate subtotal
     items.forEach(item => {
-      const quantity = parseFloat(item.querySelector(".quantity").textContent);
+      const quantityElement = item.querySelector(".quantity");
       const unitPrice = parseFloat(item.querySelector(".unit-price").textContent);
+      const quantity = parseInt(quantityElement.textContent);
       const total = quantity * unitPrice;
+
+      // Set total price for this item
       item.querySelector(".total-price").textContent = total.toFixed(2);
+      subtotal += total;
+
+      // Adjust quantity (increase or decrease)
+      item.querySelectorAll(".adjust-quantity").forEach(button => {
+        button.addEventListener("click", function() {
+          const action = this.getAttribute("data-action");
+          let currentQuantity = parseInt(quantityElement.textContent);
+
+          if (action === "increase") {
+            currentQuantity++;
+          } else if (action === "decrease" && currentQuantity > 1) {
+            currentQuantity--;
+          }
+
+          // Update quantity and total price
+          quantityElement.textContent = currentQuantity;
+          const newTotal = currentQuantity * unitPrice;
+          item.querySelector(".total-price").textContent = newTotal.toFixed(2);
+
+          // Send AJAX request to update quantity in the backend
+          updateQuantityInDatabase(item, currentQuantity);
+
+          // Recalculate subtotal
+          updateSubtotal();
+        });
+      });
+
+      // Delete item from cart
+      item.querySelector(".delete-item").addEventListener("click", function() {
+        item.remove();  // Remove from UI
+        updateSubtotal();  // Recalculate subtotal after removal
+
+        // Send AJAX request to delete item from the database
+        deleteItemFromCart(item);
+      });
     });
+
+    // Function to update subtotal
+    function updateSubtotal() {
+      subtotal = 0;
+      items.forEach(item => {
+        const quantity = parseInt(item.querySelector(".quantity").textContent);
+        const unitPrice = parseFloat(item.querySelector(".unit-price").textContent);
+        subtotal += quantity * unitPrice;
+      });
+      document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+    }
+
+    // AJAX request to update quantity in the database
+    function updateQuantityInDatabase(item, quantity) {
+      const itemId = item.id.split("-")[2];  // Extract the item id from the li id
+
+      fetch(`/update-cart-item/${itemId}/`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}'  // CSRF token for security
+        },
+        body: JSON.stringify({ quantity: quantity })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          console.log("Quantity updated successfully");
+        } else {
+          console.error("Error updating quantity");
+        }
+      });
+    }
+
+    // AJAX request to delete item from the cart
+    function deleteItemFromCart(item) {
+      const itemId = item.id.split("-")[2];  // Extract the item id from the li id
+
+      fetch(`/delete-cart-item/${itemId}/`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}'  // CSRF token for security
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          console.log("Item deleted successfully");
+        } else {
+          console.error("Error deleting item");
+        }
+      });
+    }
   });
 </script>
+
+
 
 
     </div>

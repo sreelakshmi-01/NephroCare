@@ -47,6 +47,8 @@ urlpatterns = [
     path('medicine/<int:id>/', views.medicine_detail, name='medicine_details'),
     path('admin-medicine/', views.add_medicine, name='add_medicine'),
     path('add-to-cart/<int:id>/', views.add_to_cart, name='add_to_cart'),
+    path('update-cart-item/<int:item_id>/', views.update_cart_item, name='update_cart_item'),
+    path('delete-cart-item/<int:item_id>/', views.delete_cart_item, name='delete_cart_item'),
 
 
 

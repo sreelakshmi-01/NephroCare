@@ -603,4 +603,41 @@ def add_to_cart(request, id):
 
     messages.success(request, f"{medicine.name} added to your cart.")
     return redirect('medicine_details', id=id)
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import CartItem
+
+@csrf_exempt
+def update_cart_item(request, item_id):
+    if request.method == "POST":
+        try:
+            # Get the cart item and the updated quantity
+            cart_item = CartItem.objects.get(id=item_id)
+            data = json.loads(request.body)
+            quantity = data.get('quantity')
+
+            # Update the quantity
+            if quantity and quantity > 0:
+                cart_item.quantity = quantity
+                cart_item.save()
+
+            return JsonResponse({'success': True})
+
+        except CartItem.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Item not found'})
+    return JsonResponse({'success': False, 'error': 'Invalid method'})
+
+@csrf_exempt
+def delete_cart_item(request, item_id):
+    if request.method == "POST":
+        try:
+            # Get and delete the cart item
+            cart_item = CartItem.objects.get(id=item_id)
+            cart_item.delete()
+
+            return JsonResponse({'success': True})
+
+        except CartItem.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Item not found'})
+    return JsonResponse({'success': False, 'error': 'Invalid method'})
 
