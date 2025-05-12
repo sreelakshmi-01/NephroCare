@@ -402,11 +402,13 @@ def profile_view(request):
         messages.success(request, "Profile updated successfully!")
 
         appointments = Appointment.objects.filter(user=user).order_by('-date')
+        cart_items = CartItem.objects.filter(user_id=request.session.get('user_id'))
 
     return render(request, "profile.html", {
         "user": user,
         "profile": profile,
         "appointments": appointments,
+        'cart_items': cart_items,
     })
 from django.db.models import Q
 
