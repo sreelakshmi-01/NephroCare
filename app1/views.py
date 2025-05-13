@@ -650,20 +650,17 @@ def delete_cart_item(request, item_id):
 
 def select_address(request):
     user_id = request.session.get('user_id')
-
     if not user_id:
-        return redirect('login')  # Redirect if not logged in
+        return redirect('login')
 
-    # Fetch the user object manually
     user = get_object_or_404(User, id=user_id)
-
     try:
         profile = UserProfile.objects.get(user=user)
-        address = profile.address or "No address saved."
+        addresses = [profile]  # Wrap in list to simulate multiple addresses
     except UserProfile.DoesNotExist:
-        address = "No address found."
+        addresses = []
 
-    return render(request, 'select_address.html', {'address': address})
+    return render(request, 'select_address.html', {'addresses': addresses})
 
 def confirm_order(request):
     if not request.session.get('user_id'):
