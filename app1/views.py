@@ -658,35 +658,48 @@ def select_address(request):
 
     return render(request, 'select_address.html', {'address': profile})
 
-
 def confirm_order(request):
-    if not request.session.get('user_id'):
-        return redirect('login')
+    if request.method == 'POST':
+        user_id = request.session.get('user_id')
+        print("SESSION USER ID:", user_id)  # Debug check
 
-    user = request.user
-    profile = UserProfile.objects.get(user=user)
-    address = profile.address
+        if not user_id:
+            return redirect('login')
 
-    # Create the order
-    cart_items = CartItem.objects.filter(user=user)
-    order = Order.objects.create(
-        user_id=user.id,
-        address=address,
-        amount=total_amount,  # Calculate total cart value
-    )
+        user = User.objects.filter(id=user_id).first()
+        if not user:
+            return redirect('login')
 
-    # Create order items for each cart item
-    for item in cart_items:
-        OrderItem.objects.create(
-            order=order,
-            medicine=item.medicine,
-            quantity=item.quantity,
+        address_option = request.POST.get('address_option')
+
+        if address_option == 'saved':
+            profile = UserProfile.objects.get(user=user)
+            address = f"{profile.address}, {profile.city}, {profile.state} - {profile.pincode}"
+        else:
+            new_address = request.POST.get('new_address')
+            new_city = request.POST.get('new_city')
+            new_state = request.POST.get('new_state')
+            new_pincode = request.POST.get('new_pincode')
+            address = f"{new_address}, {new_city}, {new_state} - {new_pincode}"
+
+        # Calculate cart total
+        cart_items = CartItem.objects.filter(user=user)
+        total_amount = sum(item.medicine.price * item.quantity for item in cart_items)
+
+        # Create order
+        order = Order.objects.create(
+            user_id=user.id,
+            address=address,
+            amount=total_amount,
+            payment_method='COD',
+            is_paid=False
         )
 
-    # Clear the cart after placing the order
-    cart_items.delete()
+        cart_items.delete()
 
-    return redirect('order_success', order_id=order.id)
+        return render(request, 'order_success.html', {'order': order})
+
+    return redirect('select_address')
 
 
 def order_success(request):
