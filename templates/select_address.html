@@ -2,23 +2,56 @@
 {% block content %}
 <div class="container mt-5">
   <h3>Select Delivery Address</h3>
+  <form method="POST" action="{% url 'confirm_order' %}">
+    {% csrf_token %}
 
-  {% if addresses %}
-    <form method="POST" action="{% url 'confirm_order' %}">
-      {% csrf_token %}
-      {% for address in addresses %}
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="address" value="{{ address.address }}" id="address{{ forloop.counter }}" checked>
-          <label class="form-check-label" for="address{{ forloop.counter }}">
-            {{ address.address }}, {{ address.city }}, {{ address.state }} - {{ address.pincode }}
-          </label>
-        </div>
-      {% endfor %}
-      <button type="submit" class="btn btn-success mt-3">Confirm Order</button>
-    </form>
-  {% else %}
-    <p>No address found. Please update your profile.</p>
-  {% endif %}
+    <!-- Option 1: Saved Address -->
+    {% if address %}
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="radio" name="address_option" id="savedAddress" value="saved" checked onchange="toggleNewAddress(false)">
+      <label class="form-check-label" for="savedAddress">
+        Use Saved Address:
+        <br>
+        <strong>{{ address.address }}, {{ address.city }}, {{ address.state }} - {{ address.pincode }}</strong>
+      </label>
+    </div>
+    {% endif %}
 
+    <!-- Option 2: Enter New Address -->
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="radio" name="address_option" id="newAddress" value="new" onchange="toggleNewAddress(true)">
+      <label class="form-check-label" for="newAddress">
+        Use a Different Address
+      </label>
+    </div>
+
+    <!-- New Address Fields -->
+    <div id="newAddressFields" style="display: none;">
+      <div class="mb-3">
+        <label for="new_address" class="form-label">Address</label>
+        <textarea class="form-control" name="new_address" rows="2"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="new_city" class="form-label">City</label>
+        <input type="text" class="form-control" name="new_city">
+      </div>
+      <div class="mb-3">
+        <label for="new_state" class="form-label">State</label>
+        <input type="text" class="form-control" name="new_state">
+      </div>
+      <div class="mb-3">
+        <label for="new_pincode" class="form-label">Pincode</label>
+        <input type="text" class="form-control" name="new_pincode">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Confirm Order</button>
+  </form>
 </div>
+
+<script>
+  function toggleNewAddress(show) {
+    document.getElementById("newAddressFields").style.display = show ? "block" : "none";
+  }
+</script>
 {% endblock %}

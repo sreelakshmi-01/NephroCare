@@ -654,13 +654,10 @@ def select_address(request):
         return redirect('login')
 
     user = get_object_or_404(User, id=user_id)
-    try:
-        profile = UserProfile.objects.get(user=user)
-        addresses = [profile]  # Wrap in list to simulate multiple addresses
-    except UserProfile.DoesNotExist:
-        addresses = []
+    profile = UserProfile.objects.filter(user=user).first()
 
-    return render(request, 'select_address.html', {'addresses': addresses})
+    return render(request, 'select_address.html', {'address': profile})
+
 
 def confirm_order(request):
     if not request.session.get('user_id'):
