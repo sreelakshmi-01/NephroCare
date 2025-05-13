@@ -653,17 +653,20 @@ from django.shortcuts import render, redirect
 from .models import Order, CartItem, UserProfile
 
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .models import UserProfile
+
+@login_required(login_url='login')
 def select_address(request):
-    if not request.session.get('user_id'):
-        return redirect('login')  # Redirect if not logged in
-
-    user = request.user
-    profile = UserProfile.objects.get(user=user)
-
-    # Get user's saved address
-    address = profile.address
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+        address = profile.address or ""
+    except UserProfile.DoesNotExist:
+        address = ""
 
     return render(request, 'select_address.html', {'address': address})
+
 
 
 def confirm_order(request):
