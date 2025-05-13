@@ -648,26 +648,22 @@ def delete_cart_item(request, item_id):
             return JsonResponse({'success': False, 'error': 'Item not found'})
     return JsonResponse({'success': False, 'error': 'Invalid method'})
 
-
-from django.shortcuts import render, redirect
-from .models import Order, CartItem, UserProfile
-
-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from .models import UserProfile
-
-@login_required(login_url='login')
 def select_address(request):
+    user_id = request.session.get('user_id')
+
+    if not user_id:
+        return redirect('login')  # Redirect if not logged in
+
+    # Fetch the user object manually
+    user = get_object_or_404(User, id=user_id)
+
     try:
-        profile = UserProfile.objects.get(user=request.user)
-        address = profile.address or ""
+        profile = UserProfile.objects.get(user=user)
+        address = profile.address or "No address saved."
     except UserProfile.DoesNotExist:
-        address = ""
+        address = "No address found."
 
     return render(request, 'select_address.html', {'address': address})
-
-
 
 def confirm_order(request):
     if not request.session.get('user_id'):

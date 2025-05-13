@@ -160,10 +160,7 @@
         </ul>
         <div class="text-end mt-3">
           <h5>Subtotal: Rs <span id="subtotal"></span></h5>
-          <form method="POST" action="{% url 'select_address' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-success">Place Order</button>
-          </form>
+          <a href="{% url 'select_address' %}" class="btn btn-success">Place Order</a>
         </div>
 
         {% else %}
