@@ -369,6 +369,11 @@ from django.contrib.auth.hashers import make_password  # Optional: for secure pa
 from .models import User, UserProfile
 
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from .models import UserProfile, Appointment, CartItem, Order
+from django.contrib.auth.models import User
+
 def profile_view(request):
     user_id = request.session.get('user_id')
     if not user_id:
@@ -380,8 +385,10 @@ def profile_view(request):
     # Get or create user profile
     profile, created = UserProfile.objects.get_or_create(user=user)
 
+    # Always fetch appointments, cart items, and orders (outside POST block)
     appointments = Appointment.objects.filter(user=user).order_by('-date')
-    cart_items = CartItem.objects.filter(user_id=user_id)  # <-- Moved here
+    cart_items = CartItem.objects.filter(user_id=user_id)
+    orders = Order.objects.filter(user_id=user.id).order_by('-created_at')
 
     if request.method == "POST":
         # Update User model
@@ -402,15 +409,17 @@ def profile_view(request):
 
         messages.success(request, "Profile updated successfully!")
 
-        # Optional: Refresh data after update
+        # Refresh data after update (although data is already fetched before POST)
         appointments = Appointment.objects.filter(user=user).order_by('-date')
         cart_items = CartItem.objects.filter(user_id=user_id)
+        orders = Order.objects.filter(user_id=user.id).order_by('-created_at')
 
     return render(request, "profile.html", {
         "user": user,
         "profile": profile,
         "appointments": appointments,
         "cart_items": cart_items,
+        'orders': orders,
     })
 
 from django.db.models import Q
@@ -587,9 +596,6 @@ def add_medicine(request):
         form = MedicineForm()
     return render(request, 'add_medicine.html', {'form': form})
 
-from django.shortcuts import redirect, get_object_or_404
-from django.contrib import messages
-from .models import Medicine, CartItem  # Update imports as needed
 
 def add_to_cart(request, id):
     if not request.session.get('user_id'):
