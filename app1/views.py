@@ -391,13 +391,11 @@ def profile_view(request):
     orders = Order.objects.filter(user_id=user.id).order_by('-created_at')
 
     if request.method == "POST":
-        # Update User model
         user.name = request.POST.get("name")
         password = request.POST.get("password")
         if password:
             user.password = password  # Optional: hash with make_password(password)
         user.save()
-
 
         profile.age = request.POST.get("age")
         profile.phone = request.POST.get("phone")
