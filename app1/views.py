@@ -394,7 +394,7 @@ def profile_view(request):
         user.name = request.POST.get("name")
         password = request.POST.get("password")
         if password:
-            user.password = password  # Optional: hash with make_password(password)
+            user.password = password
         user.save()
 
         profile.age = request.POST.get("age")
