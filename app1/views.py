@@ -365,7 +365,7 @@ def book(request, doctor_id):
     })
 
 
-from django.contrib.auth.hashers import make_password  # Optional: for secure password saving
+from django.contrib.auth.hashers import make_password
 from .models import User, UserProfile
 
 
