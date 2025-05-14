@@ -385,7 +385,6 @@ def profile_view(request):
     # Get or create user profile
     profile, created = UserProfile.objects.get_or_create(user=user)
 
-    # Always fetch appointments, cart items, and orders (outside POST block)
     appointments = Appointment.objects.filter(user=user).order_by('-date')
     cart_items = CartItem.objects.filter(user_id=user_id)
     orders = Order.objects.filter(user_id=user.id).order_by('-created_at')
