@@ -382,7 +382,6 @@ def profile_view(request):
 
     user = get_object_or_404(User, id=user_id)
 
-    # Get or create user profile
     profile, created = UserProfile.objects.get_or_create(user=user)
 
     appointments = Appointment.objects.filter(user=user).order_by('-date')
