@@ -398,7 +398,7 @@ def profile_view(request):
             user.password = password  # Optional: hash with make_password(password)
         user.save()
 
-        # Update Profile model
+
         profile.age = request.POST.get("age")
         profile.phone = request.POST.get("phone")
         profile.state = request.POST.get("state")
