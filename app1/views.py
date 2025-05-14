@@ -369,11 +369,6 @@ from django.contrib.auth.hashers import make_password
 from .models import User, UserProfile
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from .models import UserProfile, Appointment, CartItem, Order
-from django.contrib.auth.models import User
-
 def profile_view(request):
     user_id = request.session.get('user_id')
     if not user_id:
