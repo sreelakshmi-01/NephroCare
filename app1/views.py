@@ -412,7 +412,7 @@ def profile_view(request):
         # Refresh data after update (although data is already fetched before POST)
         appointments = Appointment.objects.filter(user=user).order_by('-date')
         cart_items = CartItem.objects.filter(user_id=user_id)
-        orders = Order.objects.filter(user_id=user.id).order_b y('-created_at')
+        orders = Order.objects.filter(user_id=user.id).order_by('-created_at')
 
     return render(request, "profile.html", {
         "user": user,
