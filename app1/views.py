@@ -701,8 +701,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Order
 
 def orders_view(request):
-    if request.session.get('user_role') != 'admin':
-        return redirect('login')  # Or show error
 
     if request.method == "POST":
         order_id = request.POST.get('order_id')
