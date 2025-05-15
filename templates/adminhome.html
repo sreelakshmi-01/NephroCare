@@ -1,0 +1,33 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-5 fw-bold text-primary">Welcome to NephroCare Admin Panel</h1>
+    <p class="lead text-muted">Manage everything from one place – diet plans, doctors, appointments, orders, and more.</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow rounded-3 h-100 text-center p-4">
+            <img src="{% static 'img/admin_diet.png' %}" alt="Diet" class="mx-auto mb-3" style="width: 80px;">
+            <h5 class="card-title">Diet & Workout</h5>
+            <p class="card-text text-muted">Add or manage diet and workout plans by stage to help patients stay healthy.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow rounded-3 h-100 text-center p-4">
+            <img src="{% static 'img/admin_doctor.png' %}" alt="Doctor" class="mx-auto mb-3" style="width: 80px;">
+            <h5 class="card-title">Doctors & Appointments</h5>
+            <p class="card-text text-muted">Manage registered doctors, hospitals, and view patient appointments.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow rounded-3 h-100 text-center p-4">
+            <img src="{% static 'img/admin_order.png' %}" alt="Orders" class="mx-auto mb-3" style="width: 80px;">
+            <h5 class="card-title">Orders & Medicines</h5>
+            <p class="card-text text-muted">Track medicine orders and update shipping status. Add new medicines anytime.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

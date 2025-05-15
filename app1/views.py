@@ -292,7 +292,7 @@ def login_view(request):
                     return redirect(next_url)
 
                 return redirect(
-                    'adminbase' if user.role == "admin" else
+                    'admin_home' if user.role == "admin" else
                     'doctor_dashboard' if user.role == "doctor" else
                     'userhome'
                 )
@@ -711,3 +711,6 @@ def orders_view(request):
 
     orders = Order.objects.all().order_by('-created_at')
     return render(request, 'orders.html', {'orders': orders})
+
+def admin_home(request):
+    return render(request, 'adminhome.html')
