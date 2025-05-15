@@ -27,12 +27,71 @@
     background-color: #f0f8ff;
     transition: background-color 0.4s ease;
   }
+  .container-fluid {
+  display: flex;
+}
+
+.sidebar {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: 100vh;
+  width: 240px;
+  background-color: #1f2937;
+  color: #fff;
+  padding: 30px 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h5 {
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #1f2937;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: #374151;
+  color: #ffffff;
+}
+
+
+.main-content {
+  margin-left: 240px;
+  padding: 30px;
+  flex-grow: 1;
+}
+
+section {
+  margin-bottom: 100px;
+}
+
 </style>
 
 <div class="container-fluid">
-  <div class="row" style="margin-top:80px;">
+  <div class="row" style="margin-top:10px;">
     <!-- Sidebar -->
-    <div class="col-md-3" style="margin-top:15px;">
+    <div class="col-md-3 sidebar" style="margin-top:15px;">
       <div class="card shadow-sm" style="height: 80vh; background-color: #f8f9fa;">
         <div class="card-body">
           <h5 class="card-title">Dashboard</h5>
@@ -53,7 +112,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="col-md-9">
+    <div class="col-md-9 main-content">
       <div class="card shadow-sm mt-3 p-4" id="profileCard">
         <h4 class="mb-4">My Profile</h4>
         <form method="POST" id="profileForm">
