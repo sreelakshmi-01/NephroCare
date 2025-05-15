@@ -1,0 +1,56 @@
+{% extends 'adminbase.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>All Orders</h2>
+    <table class="table table-bordered mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Amount</th>
+                <th>Address</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Change Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ order.id }}</td>
+                <td>{{ order.user_id }}</td>
+                <td>Rs {{ order.amount }}</td>
+                <td>{{ order.address }}</td>
+                <td>
+                    {% if order.is_paid %}
+                        <span class="badge bg-success">Paid</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <span class="badge {% if order.status == 'Pending' %}bg-warning text-dark{% elif order.status == 'Shipped' %}bg-primary{% else %}bg-success{% endif %}">
+                        {{ order.status }}
+                    </span>
+                </td>
+                <td>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <select name="status" class="form-select form-select-sm d-inline w-auto">
+                            <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                            <option value="Shipped" {% if order.status == 'Shipped' %}selected{% endif %}>Shipped</option>
+                            <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-success">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
