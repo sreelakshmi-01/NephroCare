@@ -364,11 +364,6 @@ def book(request, doctor_id):
         'user_id': user_id,
     })
 
-
-from django.contrib.auth.hashers import make_password
-from .models import User, UserProfile
-
-
 def profile_view(request):
     user_id = request.session.get('user_id')
     if not user_id:
