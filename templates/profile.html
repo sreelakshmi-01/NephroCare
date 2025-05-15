@@ -197,11 +197,13 @@
                 <td>{{ order.address }}</td>
                 <td>{{ order.payment_method }}</td>
                 <td>
-                  {% if order.is_paid %}
-                    <span class="badge bg-success">Paid</span>
-                  {% else %}
-                    <span class="badge bg-warning text-dark">Pending</span>
-                  {% endif %}
+                  <span class="badge
+                    {% if order.status == 'Pending' %}bg-warning text-dark
+                    {% elif order.status == 'Shipped' %}bg-primary
+                    {% elif order.status == 'Delivered' %}bg-success
+                    {% endif %}">
+                    {{ order.status }}
+                  </span>
                 </td>
               </tr>
               {% endfor %}
