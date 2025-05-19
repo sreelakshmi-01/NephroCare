@@ -53,6 +53,6 @@ urlpatterns = [
     path('confirm-order/', views.confirm_order, name='confirm_order'),
     path('order-success/', views.order_success, name='order_success'),
     path('admin-orders/', views.orders_view, name='orders'),
-
+    path('adminhome/', views.admin_home, name='admin_home'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
