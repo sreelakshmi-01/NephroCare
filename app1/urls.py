@@ -52,5 +52,6 @@ urlpatterns = [
     path('select-address/', views.select_address, name='select_address'),
     path('confirm-order/', views.confirm_order, name='confirm_order'),
     path('order-success/', views.order_success, name='order_success'),
+    path('admin-orders/', views.orders_view, name='orders'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
