@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # User urls
     path('register/', views.register, name = 'register'),
     path('login', views.login_view, name='login'),
     path('', views.userhome, name='userhome'),
@@ -26,13 +27,13 @@ urlpatterns = [
     path('order-success/', views.order_success, name='order_success'),
     path('profile/', views.profile_view, name='profile'),
 
-
+    # Doctor urls
     path('doctor-register/', views.doctor_registration, name = 'doctor_register'),
     path('doctor-dashboard/', views.doctor_dashboard, name = 'doctor_dashboard'),
     path('doctor/mark-completed/<int:appt_id>/', views.mark_completed, name='mark_completed'),
     path('toggle-status/', views.toggle_doctor_status, name='toggle_doctor_status'),
 
-    
+    # Admin urls
     path('adminhome/', views.admin_home, name='admin_home'),
     path('adminbase/', views.adminbase, name='adminbase'),
     path('admin-features/', views.feature_list, name='feature_list'),
