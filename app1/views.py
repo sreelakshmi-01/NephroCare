@@ -5,8 +5,6 @@ from django.contrib import messages
 from django.db import transaction
 
 def userhome(request):
-    if 'user_id' not in request.session or request.session.get('user_role') != 'user':
-        return redirect('login')
     if request.method == "POST":
         form = FAQForm(request.POST)
         if form.is_valid():
