@@ -19,11 +19,12 @@ def userhome(request):
     return render(request, 'userhome.html', {'form': form, 'faqs': faqs, 'features': features})
 
 def adminbase(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
     return render(request, 'adminbase.html')
 
 def kyk(request):
     return render(request, 'kyk.html')
-
 
 def feature_list(request):
     # Fetch all features to display in the admin panel
@@ -31,6 +32,9 @@ def feature_list(request):
     return render(request, 'add_feature.html', {'features': features})
 
 def add_feature(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     if request.method == "POST":
         form = FeatureForm(request.POST, request.FILES)
         if form.is_valid():
@@ -76,6 +80,9 @@ def faq(request):
     return render(request, 'userhome.html', {'form': form, 'faqs': faqs})
 
 def admin_faq(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     pending_faqs = FAQ.objects.filter(is_approved=False)
 
     approved_faqs = FAQ.objects.filter(is_approved=True)
@@ -169,6 +176,9 @@ def diet(request):
     return render(request, 'diet.html')
 
 def add_hospital(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     hosps = Hospital.objects.all()
     if request.method == 'POST':
         form = HospitalForm(request.POST)
@@ -413,6 +423,9 @@ def profile_view(request):
 from django.db.models import Q
 
 def admin_appointments(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     hospital_id = request.GET.get('hospital')
     doctor_id = request.GET.get('doctor')
     date = request.GET.get('date')
@@ -441,6 +454,9 @@ def admin_appointments(request):
     return render(request, 'admin_appointments.html', context)
 
 def add_stage(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     if request.method == 'POST':
         form = StageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -451,6 +467,9 @@ def add_stage(request):
     return render(request, 'add_stage.html', {'form': form})
 
 def add_diet_plan(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     if request.method == 'POST':
         form = DietPlanForm(request.POST, request.FILES)
         if form.is_valid():
@@ -461,6 +480,9 @@ def add_diet_plan(request):
     return render(request, 'add_diet_plan.html', {'form': form})
 
 def add_workout_plan(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     if request.method == 'POST':
         form = WorkoutPlanForm(request.POST, request.FILES)
         if form.is_valid():
@@ -481,6 +503,9 @@ def stage_detail(request, stage_id):
     })
 
 def admin_doctors(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     hospital_id = request.GET.get('hospital')
     doctors = Doctor.objects.all()
     hospitals = Hospital.objects.all()
@@ -496,19 +521,6 @@ def admin_doctors(request):
     return render(request, 'admin_doctors.html', context)
 
 
-def admin_doctors(request):
-    hospital_id = request.GET.get('hospital')
-    doctors = Doctor.objects.all()
-    hospitals = Hospital.objects.all()
-
-    if hospital_id:
-        doctors = doctors.filter(hospital_id=hospital_id)
-
-    return render(request, 'admin_doctors.html', {
-        'doctors': doctors,
-        'hospitals': hospitals,
-        'selected_hospital': hospital_id
-    })
 
 def admin_doctor_view(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
