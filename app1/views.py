@@ -119,6 +119,9 @@ def logout_view(request):
     return redirect("login")
 
 def add_dcenter(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     centers = DialysisCenter.objects.all()
     if request.method == 'POST':
         form = DialysisCenterForm(request.POST)
