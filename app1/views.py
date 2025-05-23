@@ -3,7 +3,6 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.db import transaction
-from django.contrib.auth.decorators import login_required
 
 def userhome(request):
     if request.method == "POST":
