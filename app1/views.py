@@ -3,6 +3,8 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.db import transaction
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def userhome(request):
     if request.method == "POST":
@@ -520,8 +522,6 @@ def admin_doctors(request):
     }
     return render(request, 'admin_doctors.html', context)
 
-
-
 def admin_doctor_view(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     return render(request, 'admin_doctor_view.html', {'doctor': doctor})
@@ -543,10 +543,6 @@ def admin_doctor_delete(request, doctor_id):
     doctor.delete()
     return redirect('admin_doctors')
 
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import Appointment
-
 @csrf_exempt
 def mark_completed(request, appt_id):
     if request.method == "POST":
@@ -558,8 +554,6 @@ def mark_completed(request, appt_id):
         except Appointment.DoesNotExist:
             return JsonResponse({"success": False})
 
-from django.shortcuts import render
-from .models import Medicine
 
 def medicine_store(request):
     medicines = Medicine.objects.all()
@@ -587,6 +581,9 @@ def medicine_detail(request, id):
 
 
 def add_medicine(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+
     if request.method == 'POST':
         form = MedicineForm(request.POST, request.FILES)
         if form.is_valid():
@@ -711,8 +708,6 @@ def confirm_order(request):
 def order_success(request):
     return render(request, 'order_success.html')
 
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Order
 
 def orders_view(request):
 
@@ -727,4 +722,7 @@ def orders_view(request):
     return render(request, 'orders.html', {'orders': orders})
 
 def admin_home(request):
+    if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
+        return redirect('login')
+    
     return render(request, 'adminhome.html')
