@@ -59,6 +59,6 @@ urlpatterns = [
     path('admin-medicine/', views.add_medicine, name='add_medicine'),
     path('admin-orders/', views.orders_view, name='orders'),
 
-
+    path('logout/', views.logout_view, name='logout'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
