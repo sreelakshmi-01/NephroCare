@@ -55,6 +55,7 @@ urlpatterns = [
     path('admin-doctors/view/<int:doctor_id>/', views.admin_doctor_view, name='admin_doctor_view'),
     path('admin-doctors/edit/<int:doctor_id>/', views.admin_doctor_edit, name='admin_doctor_edit'),
     path('admin-doctors/delete/<int:doctor_id>/', views.admin_doctor_delete, name='admin_doctor_delete'),
+    path('admin-appointments/', views.admin_appointments, name='admin_appointments'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
