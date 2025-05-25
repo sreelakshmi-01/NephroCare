@@ -579,7 +579,6 @@ def add_medicine(request):
         form = MedicineForm()
     return render(request, 'add_medicine.html', {'form': form})
 
-
 def add_to_cart(request, id):
     if not request.session.get('user_id'):
         messages.error(request, "You need to log in to add items to your cart.")
