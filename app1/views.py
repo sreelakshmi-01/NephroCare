@@ -74,7 +74,7 @@ def faq(request):
             return redirect('userhome')
     else:
         form = FAQForm()
- 
+
     faqs = FAQ.objects.filter(is_approved=True)
     return render(request, 'userhome.html', {'form': form, 'faqs': faqs})
 
@@ -86,8 +86,7 @@ def admin_faq(request):
 
     approved_faqs = FAQ.objects.filter(is_approved=True)
 
-    if request.method == "POST":
-        # Process the answer and approval for each FAQ
+    if request.method == "POST": 
         faq_id = request.POST.get("faq_id")
         answer = request.POST.get("answer")
         faq = get_object_or_404(FAQ, id=faq_id)
