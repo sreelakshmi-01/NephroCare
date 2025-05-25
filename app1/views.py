@@ -74,8 +74,7 @@ def faq(request):
             return redirect('userhome')
     else:
         form = FAQForm()
-
-    # Show only approved FAQs to the user
+ 
     faqs = FAQ.objects.filter(is_approved=True)
     return render(request, 'userhome.html', {'form': form, 'faqs': faqs})
 
