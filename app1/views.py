@@ -45,10 +45,9 @@ def add_feature(request):
             return redirect('userhome') 
     else:
         form = FeatureForm()
- 
+
     features = Feature.objects.all()
     return render(request, 'add_feature.html', {'form': form, 'features': features})
-
 
 def edit_feature(request, id):
     feature = get_object_or_404(Feature, id=id)
@@ -61,7 +60,6 @@ def edit_feature(request, id):
         form = FeatureForm(instance=feature)
 
     return render(request, 'edit_feature.html', {'form': form})
-
 
 def delete_feature(request, id):
     feature = get_object_or_404(Feature, id=id)
