@@ -86,7 +86,7 @@ def admin_faq(request):
 
     approved_faqs = FAQ.objects.filter(is_approved=True)
 
-    if request.method == "POST": 
+    if request.method == "POST":
         faq_id = request.POST.get("faq_id")
         answer = request.POST.get("answer")
         faq = get_object_or_404(FAQ, id=faq_id)
@@ -254,8 +254,7 @@ def doctor_dashboard(request):
     except Doctor.DoesNotExist:
         messages.error(request, "Doctor profile not found!")
         return redirect('login')
-
-    # ✅ Fetch appointments for this doctor
+ 
     appointments = Appointment.objects.filter(doctor=doctor).order_by('-date')
 
     return render(request, 'doctor_home.html', {
