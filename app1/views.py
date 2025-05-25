@@ -543,7 +543,6 @@ def mark_completed(request, appt_id):
         except Appointment.DoesNotExist:
             return JsonResponse({"success": False})
 
-
 def medicine_store(request):
     medicines = Medicine.objects.all()
 
