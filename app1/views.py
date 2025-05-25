@@ -558,7 +558,6 @@ def medicine_store(request):
 
     return render(request, 'medicine.html', {'medicines': medicines})
 
-
 def medicine_detail(request, id):
     medicine = get_object_or_404(Medicine, id=id)
     other_medicines = Medicine.objects.exclude(id=id)[:4]  # display 4 other medicines
