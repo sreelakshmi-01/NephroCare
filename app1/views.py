@@ -254,7 +254,7 @@ def doctor_dashboard(request):
     except Doctor.DoesNotExist:
         messages.error(request, "Doctor profile not found!")
         return redirect('login')
- 
+
     appointments = Appointment.objects.filter(doctor=doctor).order_by('-date')
 
     return render(request, 'doctor_home.html', {
@@ -291,9 +291,7 @@ def login_view(request):
                 request.session['user_role'] = user.role
                 request.session['email'] = user.email
 
-
                 print(f"User role in session: {request.session.get('user_role')}")
-
 
                 next_url = request.session.get('next')
                 if next_url:
