@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.db import transaction
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 def userhome(request):
     if request.method == "POST":
@@ -412,8 +413,6 @@ def profile_view(request):
         "cart_items": cart_items,
         'orders': orders,
     })
-
-from django.db.models import Q
 
 def admin_appointments(request):
     if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
