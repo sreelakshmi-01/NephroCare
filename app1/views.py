@@ -23,6 +23,7 @@ def userhome(request):
 def adminbase(request):
     if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
         return redirect('login')
+    
     return render(request, 'adminbase.html')
 
 def kyk(request):
