@@ -566,7 +566,6 @@ def medicine_detail(request, id):
         'other_medicines': other_medicines
     })
 
-
 def add_medicine(request):
     if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
         return redirect('login')
