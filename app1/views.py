@@ -23,7 +23,7 @@ def userhome(request):
 def adminbase(request):
     if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
         return redirect('login')
-    
+
     return render(request, 'adminbase.html')
 
 def kyk(request):
@@ -45,8 +45,7 @@ def add_feature(request):
             return redirect('userhome') 
     else:
         form = FeatureForm()
-
-    # Fetch all features to display in the admin panel
+ 
     features = Feature.objects.all()
     return render(request, 'add_feature.html', {'form': form, 'features': features})
 
