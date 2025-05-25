@@ -587,7 +587,6 @@ def add_to_cart(request, id):
     user_id = request.session.get('user_id')
     medicine = get_object_or_404(Medicine, id=id)
 
-    # Get quantity from form, default to 1 if not valid
     try:
         quantity = int(request.POST.get('quantity', 1))
         if quantity < 1:
