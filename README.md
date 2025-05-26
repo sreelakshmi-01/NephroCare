@@ -25,6 +25,7 @@
 Overall Control.
 
 **💻 Tech Stack**
+
 -------------------------------------------
 
 Frontend -	    HTML, CSS, Bootstrap, JavaScript
