@@ -245,7 +245,6 @@ def doctor_registration(request):
     hospitals = Hospital.objects.all()
     return render(request, 'doctor_register.html', {'form': form, 'hospitals': hospitals})
 
-
 def doctor_dashboard(request):
     if 'user_id' not in request.session or request.session.get('user_role') != 'doctor':
         return redirect('login')
