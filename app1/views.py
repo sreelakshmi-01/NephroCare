@@ -693,7 +693,6 @@ def order_success(request):
     return render(request, 'order_success.html')
 
 def orders_view(request):
-
     if request.method == "POST":
         order_id = request.POST.get('order_id')
         new_status = request.POST.get('status')
