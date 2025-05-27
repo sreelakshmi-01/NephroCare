@@ -275,7 +275,6 @@ def toggle_doctor_status(request):
             return JsonResponse({'error': 'Doctor not found'}, status=404)
     return JsonResponse({'error': 'Unauthorized'}, status=401)
 
-
 def doctor_list(request, hosp_id):
     doctors = Doctor.objects.filter(hospital_id = hosp_id)
     return render(request, 'doctor_list.html', {'doctors': doctors})
