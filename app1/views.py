@@ -692,7 +692,6 @@ def confirm_order(request):
 def order_success(request):
     return render(request, 'order_success.html')
 
-
 def orders_view(request):
 
     if request.method == "POST":
