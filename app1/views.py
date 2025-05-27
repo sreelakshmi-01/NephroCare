@@ -701,6 +701,7 @@ def orders_view(request):
         order.save()
 
     orders = Order.objects.all().order_by('-created_at')
+    
     return render(request, 'orders.html', {'orders': orders})
 
 def admin_home(request):
