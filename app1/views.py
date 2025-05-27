@@ -217,7 +217,6 @@ def hospital_list(request):
 
     return render(request, 'book_appointment.html', {'hosps': hosps, 'districts': districts})
 
-
 def doctor_registration(request):
     if request.method == 'POST':
         form = DoctorForm(request.POST)
@@ -232,7 +231,7 @@ def doctor_registration(request):
                         password=doctor.password,
                         role='doctor'
                     )
-                    
+
                     messages.success(request, "Doctor registered successfully!")
                     return redirect('login')
             except Exception as e:
