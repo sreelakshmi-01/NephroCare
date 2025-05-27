@@ -648,7 +648,6 @@ def select_address(request):
 def confirm_order(request):
     if request.method == 'POST':
         user_id = request.session.get('user_id')
-        print("SESSION USER ID:", user_id)  # Debug check
 
         if not user_id:
             return redirect('login')
@@ -701,7 +700,7 @@ def orders_view(request):
         order.save()
 
     orders = Order.objects.all().order_by('-created_at')
-    
+
     return render(request, 'orders.html', {'orders': orders})
 
 def admin_home(request):
