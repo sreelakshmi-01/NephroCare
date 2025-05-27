@@ -442,7 +442,6 @@ def admin_appointments(request):
         'selected_doctor': doctor_id,
         'selected_date': date,
     }
-
     return render(request, 'admin_appointments.html', context)
 
 def add_stage(request):
