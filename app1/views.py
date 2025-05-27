@@ -706,5 +706,5 @@ def orders_view(request):
 def admin_home(request):
     if 'user_id' not in request.session or request.session.get('user_role') != 'admin':
         return redirect('login')
-    
+
     return render(request, 'adminhome.html')
