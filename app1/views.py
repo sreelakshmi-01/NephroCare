@@ -232,7 +232,6 @@ def doctor_registration(request):
                         password=doctor.password,
                         role='doctor'
                     )
-
                     messages.success(request, "Doctor registered successfully!")
                     return redirect('login')
             except Exception as e:
